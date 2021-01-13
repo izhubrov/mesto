@@ -3,6 +3,10 @@
   border-bottom: 1px solid rgba(84,84,84, 0.7);
   padding-top: 45px;
   min-height: 74px;
+<<<<<<< HEAD
+=======
+  box-sizing: border-box;
+>>>>>>> feature/header
 }
 
 @media screen and (max-width: 880px) {
