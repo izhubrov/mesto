@@ -6,3 +6,15 @@
   column-gap: 18px;
   color: #fff;
 }
+
+@media screen and (max-width: 680px) {
+  .profile__info {
+    row-gap: 14px;
+    column-gap: 10px;
+    grid-template-columns: max-content 18px;
+    margin-bottom: 36px;
+    justify-items: center;
+  }
+
+
+}

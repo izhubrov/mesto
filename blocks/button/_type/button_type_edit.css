@@ -1,0 +1,12 @@
+.button_type_edit{
+  width: 100%;
+  height: 24px;
+  align-self: center;
+}
+
+@media screen and (max-width: 680px) {
+  .button_type_edit {
+    height: 18px;
+    align-self: end;
+  }
+}

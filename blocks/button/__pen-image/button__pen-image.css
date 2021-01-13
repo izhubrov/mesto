@@ -1,0 +1,12 @@
+.button__pen-image {
+  background-image: url('../../../images/edit-button.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
