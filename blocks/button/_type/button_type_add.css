@@ -4,6 +4,7 @@
   height: 50px;
   border: 2px solid #fff;
   border-radius: 2px;
+  transition: opacity .3s;
 }
 
 .button_type_add:hover {

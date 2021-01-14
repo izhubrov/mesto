@@ -1,0 +1,9 @@
+.cards__like {
+  padding-right: 5px;
+  transition: opacity .3s;
+  cursor: pointer;
+}
+
+.cards__like:hover {
+  opacity: 0.5;
+}
