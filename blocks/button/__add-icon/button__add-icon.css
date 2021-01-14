@@ -1,5 +1,5 @@
-.button__cross-image {
-  background-image: url('../../../images/add-button.svg');
+.button__add-icon {
+  background-image: url('../../../images/add-icon.svg');
   background-position: center;
   background-repeat: no-repeat;
   width: 22px;
@@ -8,5 +8,5 @@
   z-index: 1;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);                    
-}       
+  transform: translate(-50%,-50%);
+}

@@ -1,0 +1,17 @@
+.button_type_submit {
+  max-width: 358px;
+  height: 50px;
+  border-radius: 2px;
+  border: none;
+  transition: opacity .3s;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.22;
+  text-align: center;
+  color: #fff;
+  background-color: #000;
+}
+
+.button_type_submit:hover {
+opacity: 0.8;
+}
