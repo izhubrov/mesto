@@ -4,7 +4,7 @@
   object-fit: contain;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 918px) {
   .header__logo {
     padding-left: 27px;
     width: calc((103.74/320)*100%);
