@@ -4,6 +4,10 @@
   align-self: center;
   border: 1px solid #fff;
   transition: opacity .3s;
+  background-image: url('../../../images/edit-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
 }
 
 .button_type_edit:hover {

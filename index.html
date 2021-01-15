@@ -18,27 +18,23 @@
       <img class="profile__avatar" src="./images/Avatar.png" alt="Портрет исследователя Жака-Ив Кусто">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="button button_type_edit">
-          <div class="button__edit-icon"></div>
-        </button>
+        <button class="button button_type_edit"></button>
         <p class="profile__about">Исследователь океана</p>
       </div>
-      <button class="button button_type_add">
-        <div class="button__add-icon"></div>
-      </button>
+      <button class="button button_type_add"></button>
     </section>
 
-    <div class="overlay"></div>
-    <form class="edit-form page__container">
-      <button class="button button_type_close">
-        <div class="button__close-icon"></div>
-      </button>
-        <h2 class="edit-form__title">Редактировать профиль</h2>
-        <div class="input">
-          <input type="text" name="name" class="input__text input__text_type_name" value="Жак-Ив Кусто">
-          <input type="text" name="about" class="input__text input__text_type_about" value="Исследователь океана">
-          <button class="button button_type_submit">Сохранить</button>
-        </div>
+
+
+    <div class="page__overlay"></div>
+    <form class="form form_type_edit page__container">
+      <button class="button button_type_close"></button>
+      <h2 class="form__title">Редактировать профиль</h2>
+      <div class="input">
+        <input type="text" name="name" class="input__text input__text_type_name" value="Жак-Ив Кусто">
+        <input type="text" name="about" class="input__text input__text_type_about" value="Исследователь океана">
+        <button class="button button_type_submit">Сохранить</button>
+      </div>
     </form>
 
     <section class="places page__container">
