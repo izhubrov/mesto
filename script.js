@@ -28,16 +28,32 @@ function showEditForm() {
 }
 btnEdit.addEventListener('click', showEditForm);
 //Открыть Форму редактирования Profile
-/*
-function SubmitEditForm() {
-  profileName.textContent = `${editFormName.getAttribute('value')}`;
-  console.log('123');
+
+function SubmitEditForm(evt) {
+  evt.preventDefault();
+  /*let fn = input.querySelector('.input__text_type_name');
+  let fa = input.querySelector('.input__text_type_about');
+  let pn = profile.querySelector('.profile__name');
+  let pa = profile.querySelector('.profile__about');
+  let pnv = fn.getAttribute('value');
+  let pav = fa.value;*/
+  profileName = editFormName.nodeValue;
+  pn.textContent =  `${pnv}`;
+  pa.textContent =  `${pav}`;
+  console.log(`${pnv}`);
+  console.log(`${pav}`);
+  closeEditForm(evt);
 }
-btnSubmit.addEventListener('click',SubmitEditForm);
+
+  /*
+  profileAbout.textContent = `${editFormAbout.getAttribute('value')}`;*/
+
+editForm.addEventListener('submit',SubmitEditForm);
 //Сохранить данные в Форме редактирования Profile
 
 
-function closeEditForm() {
+function closeEditForm(evt) {
+  evt.preventDefault();
   overlay.setAttribute('style','display:none');
   editForm.setAttribute('style', 'display:none');
 }
