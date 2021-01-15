@@ -38,12 +38,8 @@ function SubmitEditForm(evt) {
   closeEditForm(evt);
 }
 
-  /*
-  profileAbout.textContent = `${editFormAbout.getAttribute('value')}`;*/
-
 editForm.addEventListener('submit',SubmitEditForm);
 //Сохранить данные в Форме редактирования Profile
-
 
 function closeEditForm(evt) {
   evt.preventDefault();
