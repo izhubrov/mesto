@@ -1,20 +1,19 @@
 .profile__info {
-  display: grid;
-  grid-template-columns: max-content 24px;
-  grid-template-rows: repeat(2, max-content);
-  row-gap: 16px;
-  column-gap: 18px;
+  display: flex;
+  justify-items: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
   color: #fff;
+  max-width: 350px;
 }
 
 @media screen and (max-width: 680px) {
   .profile__info {
     row-gap: 14px;
     column-gap: 10px;
-    grid-template-columns: max-content 18px;
     margin-bottom: 36px;
-    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
   }
-
-
 }

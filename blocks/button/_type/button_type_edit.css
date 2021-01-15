@@ -1,5 +1,5 @@
 .button_type_edit{
-  width: 100%;
+  width: 24px;
   height: 24px;
   align-self: center;
   border: 1px solid #fff;
@@ -8,6 +8,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
+  position: absolute;
+  bottom: 5px;
+  right: -42px;
 }
 
 .button_type_edit:hover {
@@ -16,7 +19,8 @@
 
 @media screen and (max-width: 680px) {
   .button_type_edit {
+    width: 18px;
     height: 18px;
-    align-self: end;
+    right: -28px;
   }
 }
