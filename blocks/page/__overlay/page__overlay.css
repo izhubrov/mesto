@@ -1,5 +1,5 @@
 .page__overlay {
-  display: block;
+  display: none;
   background-color: #000;
   opacity: 0.5;
   position: fixed;

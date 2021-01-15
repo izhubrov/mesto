@@ -7,3 +7,8 @@
   padding: 0 0 13px;
   box-sizing: border-box;
 }
+
+.input__text:focus {
+  outline: none;
+  box-shadow:0 0 5px 5px rgba(0,0,0,0.2);
+}

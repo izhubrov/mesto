@@ -1,4 +1,5 @@
 .form_type_edit {
+  display: none;
   width: 430px;
   position: fixed;
   z-index: 2;

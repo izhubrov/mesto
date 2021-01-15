@@ -5,4 +5,5 @@
   align-items: center;
   cursor: pointer;
   padding:0;
+  outline: none;
 }
