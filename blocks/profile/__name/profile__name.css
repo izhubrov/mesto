@@ -3,8 +3,9 @@
   font-weight: 400;
   line-height: 1.14;
   margin: 0;
-  max-width: 100%;
-  width: minmax(min-content,max-content);
+  max-width: 350px;
+  display: flex;
+  justify-content: flex-start;
   white-space: pre-wrap;
   overflow-wrap: break-word;
 }

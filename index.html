@@ -20,22 +20,23 @@
         <div class="profile__container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="button button_type_edit"></button>
-      </div>
+        </div>
         <p class="profile__about">Исследователь океана</p>
       </div>
       <button class="button button_type_add"></button>
     </section>
 
-    <div class="page__overlay"></div>
-    <form class="form form_type_edit page__container">
-      <button class="button button_type_close"></button>
-      <h2 class="form__title">Редактировать профиль</h2>
-      <div class="input">
-        <input type="text" name="name" class="input__text input__text_type_name">
-        <input type="text" name="about" class="input__text input__text_type_about">
-        <button class="button button_type_submit">Сохранить</button>
-      </div>
-    </form>
+    <div class="popup">
+      <form class="popup__container">
+        <button class="button button_type_close"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <div class="input">
+          <input type="text" name="name" class="input__text input__text_type_name">
+          <input type="text" name="about" class="input__text input__text_type_about">
+          <button class="button button_type_submit">Сохранить</button>
+        </div>
+      </form>
+    </div>
 
     <section class="places page__container">
       <ul class="cards">
@@ -43,42 +44,60 @@
           <img class="cards__image" src="./images/karachaevsk.jpg" alt="Изображение старинного храма в Карачаево-Черкессии">
           <div class="cards__description">
             <h2 class="cards__title">Карачаевск</h2>
-            <img class="cards__like" src="./images/like.svg" alt="Изображение сердечка">
+            <label>
+              <input type="checkbox" class="cards__like">
+              <span class="cards__pseudo-like"></span>
+            </label>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/elbrus.jpg" alt="Изображение горы Эльбрус вдалеке">
           <div class="cards__description">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <img class="cards__like" src="./images/like.svg" alt="Изображение сердечка">
+            <label>
+              <input type="checkbox" class="cards__like">
+              <span class="cards__pseudo-like"></span>
+            </label>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/dombai.jpg" alt="Изображение горной территории Домбая">
           <div class="cards__description">
             <h2 class="cards__title">Домбай</h2>
-            <img class="cards__like" src="./images/like.svg" alt="Изображение сердечка">
+            <label>
+              <input type="checkbox" class="cards__like">
+              <span class="cards__pseudo-like"></span>
+            </label>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/elbrus.jpg" alt="Изображение горы Эльбрус вдалеке">
           <div class="cards__description">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <img class="cards__like" src="./images/like.svg" alt="Изображение сердечка">
+            <label>
+              <input type="checkbox" class="cards__like">
+              <span class="cards__pseudo-like"></span>
+            </label>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/dombai.jpg" alt="Изображение горной территории Домбая">
           <div class="cards__description">
             <h2 class="cards__title">Домбай</h2>
-            <img class="cards__like" src="./images/like.svg" alt="Изображение сердечка">
+            <label>
+              <input type="checkbox" class="cards__like">
+              <span class="cards__pseudo-like"></span>
+            </label>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/karachaevsk.jpg" alt="Изображение старинного храма в Карачаево-Черкессии">
           <div class="cards__description">
             <h2 class="cards__title">Карачаево-Черкессия</h2>
-            <img class="cards__like" src="./images/like.svg" alt="Изображение сердечка">
+            <label>
+              <input type="checkbox" class="cards__like">
+              <span class="cards__pseudo-like"></span>
+            </label>
           </div>
         </li>
       </ul>

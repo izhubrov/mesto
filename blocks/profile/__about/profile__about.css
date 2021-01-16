@@ -5,7 +5,9 @@
   margin: 0;
   white-space: pre-wrap;
   overflow-wrap: break-word;
-  max-width: 100%;
+  max-width: 350px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 @media screen and (max-width: 918px) {
