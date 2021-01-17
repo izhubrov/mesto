@@ -6,8 +6,6 @@ let places = document.querySelector('.places');
 let btnEdit = page.querySelector('.profile__btn-edit');
 let btnClose = page.querySelector('.popup__btn-close');
 let btnSubmit = page.querySelector('.popup__btn-submit');
-let btnLike = page.querySelectorAll('.cards__btn-like');
-//выше переменные для кнопок
 
 let profile = page.querySelector('.profile');
 
@@ -17,7 +15,6 @@ let editForm = page.querySelector('.popup__container');
 let input = editForm.querySelector('.input');
 let profileName = profile.querySelector('.profile__name');
 let profileAbout = profile.querySelector('.profile__about');
-
 
 //выше переменные для Формы редактирования Profile
 
@@ -50,23 +47,3 @@ function closeEditForm(evt) {
 }
 btnClose.addEventListener('click', closeEditForm);
 //Закрыть Форму редактирования Profile*/
-let a;
-function liked(a) {
-  console.log(`${a}`);
-}
-
-function like() {
-  for (let i=0; i<btnLike.length; i++) {
-    btnLike[i].addEventListener('click', function() {
-      if (btnLike[i].classList.contains('cards__btn-like_active') === true) {
-        btnLike[i].classList.remove('cards__btn-like_active');
-      }
-      else {
-        btnLike[i].classList.add('cards__btn-like_active');
-      }
-    });
-  }
-}
-
-like();
-

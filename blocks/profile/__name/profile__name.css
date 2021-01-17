@@ -3,17 +3,9 @@
   font-weight: 400;
   line-height: 1.14;
   margin: 0;
-  max-width: 350px;
-  display: flex;
-  justify-content: flex-start;
+  word-wrap: break-word;
   white-space: pre-wrap;
-  overflow-wrap: break-word;
-}
-
-@media screen and (max-width: 918px) {
-  .profile__name {
-    font-size: 34px;    
-  }
+  max-width: 100%;
 }
 
 @media screen and (max-width: 680px) {

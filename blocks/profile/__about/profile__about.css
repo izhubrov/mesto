@@ -4,10 +4,8 @@
   line-height: 1.22;
   margin: 0;
   white-space: pre-wrap;
-  overflow-wrap: break-word;
-  max-width: 350px;
-  display: flex;
-  justify-content: flex-start;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 918px) {
