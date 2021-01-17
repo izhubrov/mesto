@@ -1,26 +1,28 @@
-.button_type_edit{
+.profile__btn-edit{
   width: 24px;
   height: 24px;
-  align-self: center;
   border: 1px solid #fff;
+  outline: none;
   transition: opacity .3s;
   background-image: url('../../../images/edit-icon.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
+  cursor: pointer;
   position: absolute;
   bottom: 5px;
   right: -42px;
 }
-
-.button_type_edit:hover {
+  
+.profile__btn-edit:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 680px) {
-  .button_type_edit {
+  .profile__btn-edit {
     width: 18px;
     height: 18px;
     right: -28px;
   }
 }
+  
