@@ -2,8 +2,7 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 1.2;
-  margin: 0 0 54px;
-  height: 0.95;
+  margin: 0 0 49px;
 }
 
 @media screen and (max-width: 468px) {
@@ -11,6 +10,5 @@
     font-size: 18px;
     line-height: 1.22;
     margin: 0 0 75px;
-    height: 1.22;
   }
 }
