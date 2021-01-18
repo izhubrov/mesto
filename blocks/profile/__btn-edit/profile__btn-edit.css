@@ -9,21 +9,19 @@
   background-position: center;
   background-color: transparent;
   cursor: pointer;
-  position: absolute;
-  bottom: 5px;
-  right: -42px;
-  padding: 0;
+  margin-bottom: 8px;
+  align-self: flex-end;
 }
-  
+
 .profile__btn-edit:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 680px) {
   .profile__btn-edit {
+    margin-bottom: 5px;
     width: 18px;
     height: 18px;
     right: -28px;
   }
 }
-  

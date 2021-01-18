@@ -4,7 +4,7 @@
   align-items: flex-start;
   flex-direction: column;
   color: #fff;
-  max-width: 48%;
+  max-width: 55%;
 }
 
 @media screen and (max-width: 680px) {
@@ -12,6 +12,6 @@
     margin-bottom: 36px;
     justify-content: center;
     align-items: center;
-    max-width: calc((189 / 320) * 100%);
+    max-width: 100%;
   }
 }
