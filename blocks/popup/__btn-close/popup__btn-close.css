@@ -14,12 +14,12 @@
   transform: rotate(45deg);
   transition: opacity .3s;
 }
-  
+
 .popup__btn-close:hover {
   opacity: 0.6;
 }
-  
-@media screen and (max-width: 540px) {
+
+@media screen and (max-width: 560px) {
   .popup__btn-close {
     width: 26px;
     height: 26px;
@@ -27,4 +27,3 @@
     right: 5px;
   }
 }
-  

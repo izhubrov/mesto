@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 508px) {
+@media screen and (max-width: 468px) {
   .popup__container {
     width: calc(100% - 39px);
     padding: 25px 22px;
