@@ -15,28 +15,16 @@
   </header>
   <main>
     <section class="profile page__container">
-      <img class="profile__avatar" src="./images/Avatar.png" alt="Портрет исследователя Жака-Ив Кусто">
+      <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар пользователя">
       <div class="profile__info">
         <div class="profile__container">
           <h1 class="profile__name text-cut">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__btn-edit"></button>
+          <button type="button" aria-label="Редактировать" class="profile__btn-edit"></button>
         </div>
        <p class="profile__about text-cut">Исследователь океана</p>
       </div>
-      <button type="button" class="profile__btn-add"></button>
+      <button type="button" aria-label="Добавить" class="profile__btn-add"></button>
     </section>
-
-    <div class="popup">
-      <form class="popup__container" name="popup">
-        <button type="button" class="popup__btn-close"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <div class="input">
-          <input type="text" name="name" class="input__text input__text_type_name">
-          <input type="text" name="about" class="input__text input__text_type_about">
-        </div>
-        <button type="submit" class="popup__btn-submit">Сохранить</button>
-      </form>
-    </div>
 
     <section class="places page__container">
       <ul class="cards">
@@ -44,42 +32,42 @@
           <img class="cards__image" src="./images/karachaevsk.jpg" alt="Изображение старинного храма в Карачаево-Черкессии">
           <div class="cards__description">
             <h2 class="cards__title text-cut">Карачаевск</h2>
-            <button type="button" class="cards__btn-like"></button>
+            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/elbrus.jpg" alt="Изображение горы Эльбрус вдалеке">
           <div class="cards__description">
             <h2 class="cards__title text-cut">Гора Эльбрус</h2>
-            <button type="button" class="cards__btn-like"></button>
+            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/dombai.jpg" alt="Изображение горной территории Домбая">
           <div class="cards__description">
             <h2 class="cards__title text-cut">Домбай</h2>
-            <button type="button" class="cards__btn-like"></button>
+            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/elbrus.jpg" alt="Изображение горы Эльбрус вдалеке">
           <div class="cards__description">
             <h2 class="cards__title text-cut">Гора Эльбрус</h2>
-            <button type="button" class="cards__btn-like"></button>
+            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/dombai.jpg" alt="Изображение горной территории Домбая">
           <div class="cards__description">
             <h2 class="cards__title text-cut">Домбай</h2>
-            <button type="button" class="cards__btn-like"></button>
+            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/karachaevsk.jpg" alt="Изображение старинного храма в Карачаево-Черкессии">
           <div class="cards__description">
             <h2 class="cards__title text-cut">Карачаево-Черкессия</h2>
-            <button type="button" class="cards__btn-like"></button>
+            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
           </div>
         </li>
       </ul>
@@ -88,6 +76,19 @@
 <footer class="footer page__container">
   <h2 class= "footer__author">&copy; 2020 Mesto Russia</h2>
 </footer>
+
+<div class="popup">
+  <div class="popup__container">
+  <h2 class="popup__title">Редактировать профиль</h2>
+  <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
+  <form class="popup__form" name="popup-form">
+    <input type="text" name="name" class="popup__input">
+    <input type="text" name="about" class="popup__input">
+    <button type="submit" class="popup__btn-submit">Сохранить</button>
+  </form>
+  </div>
+</div>
+
 <script src="./script.js"></script>
 </body>
 </html>

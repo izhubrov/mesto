@@ -1,13 +1,23 @@
-.input__text {
+.popup__input {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
   height: 27px;
   font-family: inherit;
   border: none;
   border-bottom: 1px solid rgba(0,0,0,0.2);
   padding: 0 0 13px;
+  margin-bottom: 30px;
   box-sizing: border-box;
+  width: 100%;
 }
 
-.input__text:focus {
+.popup__input:focus {
   outline: none;
   box-shadow:0 0 5px 5px rgba(0,0,0,0.2);
 }
+
+.popup__input:last-of-type {
+  margin: 0;
+}
+

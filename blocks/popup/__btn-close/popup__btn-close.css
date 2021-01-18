@@ -13,6 +13,7 @@
   cursor: pointer;
   transform: rotate(45deg);
   transition: opacity .3s;
+  padding: 0;
 }
 
 .popup__btn-close:hover {

@@ -11,8 +11,8 @@ let profile = page.querySelector('.profile');
 
 //---Форма редактирования профиля---//
 let popup = page.querySelector('.popup');
-let editForm = page.querySelector('.popup__container');
-let input = editForm.querySelector('.input');
+let editForm = page.querySelector('.popup__form');
+let input = editForm.querySelectorAll('.popup__input');
 let profileName = profile.querySelector('.profile__name');
 let profileAbout = profile.querySelector('.profile__about');
 
@@ -20,10 +20,17 @@ let profileAbout = profile.querySelector('.profile__about');
 
 function showEditForm(evt) {
   evt.preventDefault();
-  let editFormName = input.querySelector('.input__text_type_name');
-  let editFormAbout = input.querySelector('.input__text_type_about');
+  let editFormName;
+  let editFormAbout;
+  for (let i=0; i<input.length;i++) {
+    if (input[i].name === 'name') {
+      editFormName = input[i];
+    } else {
+      editFormAbout = input[i];
+    }
+  }
   editFormName.value = profileName.textContent;
-  editFormAbout.value= profileAbout.textContent;
+  editFormAbout.value = profileAbout.textContent;
   popup.classList.add('popup_opened');
 }
 btnEdit.addEventListener('click', showEditForm);
@@ -31,8 +38,15 @@ btnEdit.addEventListener('click', showEditForm);
 
 function SubmitEditForm(evt) {
   evt.preventDefault();
-  let editFormName = input.querySelector('.input__text_type_name');
-  let editFormAbout = input.querySelector('.input__text_type_about');
+  let editFormName;
+  let editFormAbout;
+  for (let i=0; i<input.length;i++) {
+    if (input[i].name === 'name') {
+      editFormName = input[i];
+    } else {
+      editFormAbout = input[i];
+    }
+  }
   profileName.textContent =  `${editFormName.value}`;
   profileAbout.textContent =  `${editFormAbout.value}`;
   closeEditForm(evt);

@@ -6,6 +6,10 @@
   position: relative;
   padding: 34px 36px 37px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 @media screen and (max-width: 468px) {
