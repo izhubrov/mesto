@@ -38,7 +38,14 @@ function SubmitEditForm(evt) {
   closeEditForm(evt);
 }
 
-editForm.addEventListener('submit',SubmitEditForm);
+editForm.addEventListener('submit', SubmitEditForm);
+
+editForm.addEventListener('keypress', function(evt) {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    SubmitEditForm(evt);
+  }
+});
 //Сохранить данные в Форме редактирования Profile
 
 function closeEditForm(evt) {
