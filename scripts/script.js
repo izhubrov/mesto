@@ -15,20 +15,8 @@ let profileName = profile.querySelector('.profile__name');
 let profileAbout = profile.querySelector('.profile__about');
 
 //Переменные для input формы Popup//
-let editFormName;
-let editFormAbout;
-
-function selectInput() {
-  for (let i=0; i<input.length;i++) {
-    if (input[i].name === 'name') {
-      editFormName = input[i];
-    } else {
-      editFormAbout = input[i];
-    }
-  }
-}
-
-selectInput();
+let editFormName = popup.querySelector('.popup__input_type_name');
+let editFormAbout = popup.querySelector('.popup__input_type_about');
 
 function showEditForm() {
   editFormName.value = profileName.textContent;
@@ -40,7 +28,7 @@ function closeEditForm() {
   popup.classList.remove('popup_opened');
 }
 
-function SubmitEditForm(evt) {
+function submitEditForm(evt) {
   evt.preventDefault();
   profileName.textContent =  editFormName.value;
   profileAbout.textContent =  editFormAbout.value;
@@ -49,4 +37,4 @@ function SubmitEditForm(evt) {
 
 btnEdit.addEventListener('click', showEditForm);
 btnClose.addEventListener('click', closeEditForm);
-editForm.addEventListener('submit', SubmitEditForm);
+editForm.addEventListener('submit', submitEditForm);
