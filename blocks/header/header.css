@@ -9,6 +9,6 @@
   .header {
     padding-top: 28px;
     height: calc((55/320)*100%);
-    max-height: 73px;
+    min-height: 55px;
   }
 }

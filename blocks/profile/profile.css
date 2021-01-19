@@ -8,13 +8,15 @@
 
 @media screen and (max-width: 918px) {
   .profile {
-    padding: 40px 19px 50px;
+    padding-right: 19px;
+    padding-left: 19px;
   }
 }
 
 @media screen and (max-width: 680px) {
   .profile {
     flex-direction: column;
-    padding: 42px 19px 36px;
+    padding-top: 42px;
+    padding-bottom: 36px;
   }
 }
