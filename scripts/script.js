@@ -1,14 +1,16 @@
 // Переменные элементов страницы
 const page = document.querySelector('.page');
 const popup = page.querySelector('.popup');
-const popupTemplate = page.querySelector('.popup-template').content;
 const profile = page.querySelector('.profile');
+const btnAdd = profile.querySelector('.profile__btn-add');
+
 // Шаблон профиля
 const profileTemplate = page.querySelector('.profile-template').content;
 const profileAvatar = profileTemplate.querySelector('.profile__avatar').cloneNode(true);
 const profileInfo = profileTemplate.querySelector('.profile__info').cloneNode(true);
 const profileName = profileInfo.querySelector('.profile__name');
 const profileAbout = profileInfo.querySelector('.profile__about');
+const btnEdit = profileInfo.querySelector('.profile__btn-edit');
 profile.prepend(profileAvatar,profileInfo);
 
 function profileOnLoad() {
@@ -21,26 +23,35 @@ function profileOnLoad() {
 profileOnLoad();
 //
 
+function closeForm() {
+
+  popup.classList.remove('popup__opened');
+
+  if (popup.querySelector('.popup__container'))
+  popup.querySelector('.popup__container').remove();
+}
+
 // Шаблон формы
+const popupTemplate = page.querySelector('.popup-template').content;
 
-
-// const profilePopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
-// const profileFormName = profilePopup.querySelector('.popup__input_type_name');
-// const profileFormAbout = profilePopup.querySelector('.popup__input_type_about');
-
+// Редактирование Профиля пользователя
 function editProfileForm() {
 
   const profilePopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
   const profileFormName = profilePopup.querySelector('.popup__input_type_name');
   const profileFormAbout = profilePopup.querySelector('.popup__input_type_about');
   popup.append(profilePopup);
+  const profileForm = popup.querySelector('.popup__form');
 
-  profilePopup.querySelector('.popup__title').textContent = 'Редактировать профиль';
-  profilePopup.querySelector('.popup__btn-submit').textContent = 'Сохранить';
+  function showProfileForm() {
+    profilePopup.querySelector('.popup__title').textContent = 'Редактировать профиль';
+    profilePopup.querySelector('.popup__btn-submit').textContent = 'Сохранить';
+    profileFormName.value = profileName.textContent;
+    profileFormAbout.value = profileAbout.textContent;
+    popup.classList.add('popup__opened');
+  }
 
-  profileFormName.value = profileName.textContent;
-  profileFormAbout.value = profileAbout.textContent;
-  popup.classList.add('popup__opened');
+  showProfileForm();
 
   function submitProfileForm(evt) {
     evt.preventDefault();
@@ -50,43 +61,45 @@ function editProfileForm() {
     closeForm();
   }
 
-  const profileForm = popup.querySelector('.popup__form');
-  const btnClose = page.querySelector('.popup__btn-close');
   profileForm.addEventListener('submit', submitProfileForm);
-  btnClose.addEventListener('click', closeForm);
 }
 
-const btnEdit = profileInfo.querySelector('.profile__btn-edit');
-btnEdit.addEventListener('click', editProfileForm);
+// Редактирование Карточек
+function addCardForm() {
 
-
-
-function editCardForm() {
   const cardPopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
   const cardName = cardPopup.querySelector('.popup__input_type_name');
   const cardLink = cardPopup.querySelector('.popup__input_type_about');
   popup.append(cardPopup);
-  cardPopup.querySelector('.popup__title').textContent = 'Новое место';
-  cardPopup.querySelector('.popup__btn-submit').textContent = 'Создать';
-  cardName.placeholder = 'Название';
-  cardLink.placeholder = 'Ссылка на картинку';
-  popup.classList.add('popup__opened');
-  const btnClose = page.querySelector('.popup__btn-close');
-  btnClose.addEventListener('click', closeForm);
+  const cardForm = popup.querySelector('.popup__form');
+
+  function showCardForm() {
+    cardPopup.querySelector('.popup__title').textContent = 'Новое место';
+    cardPopup.querySelector('.popup__btn-submit').textContent = 'Создать';
+    cardName.placeholder = 'Название';
+    cardLink.placeholder = 'Ссылка на картинку';
+    popup.classList.add('popup__opened');
+  }
+
+  showCardForm();
+
+  function submitCardForm(evt) {
+    evt.preventDefault();
+    popup.querySelector('.popup__container').remove();
+    closeForm();
+  }
+
+  cardForm.addEventListener('submit', submitCardForm);
 }
 
-const btnAdd = profile.querySelector('.profile__btn-add');
-btnAdd.addEventListener('click', editCardForm);
+btnEdit.addEventListener('click', editProfileForm);
+btnAdd.addEventListener('click', addCardForm);
+page.addEventListener('click', (evt) => {
+ if (evt.target.classList.contains('popup__btn-close'))
+ closeForm();
+});
 
 
-function closeForm() {
-  popup.classList.remove('popup__opened');
-  console.log(popup);
-
-  if (popup.querySelector('.popup__container')){
-  popup.querySelector('.popup__container').remove();
-}
-}
 
 
 
