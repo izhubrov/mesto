@@ -20,11 +20,11 @@ let editFormAbout = popup.querySelector('.popup__input_type_about');
 function showEditForm() {
   editFormName.value = profileName.textContent;
   editFormAbout.value = profileAbout.textContent;
-  popup.classList.add('popup_opened');
+  popup.classList.add('popup__opened');
 }
 
 function closeEditForm() {
-  popup.classList.remove('popup_opened');
+  popup.classList.remove('popup__opened');
 }
 
 function submitEditForm(evt) {
