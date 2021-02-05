@@ -8,7 +8,6 @@ let input = editForm.querySelectorAll('.popup__input');
 // Переменные кнопок
 let btnEdit = page.querySelector('.profile__btn-edit');
 let btnClose = page.querySelector('.popup__btn-close');
-let btnSubmit = page.querySelector('.popup__btn-submit');
 
 //Переменные раздела Профиль//
 let profileName = profile.querySelector('.profile__name');
