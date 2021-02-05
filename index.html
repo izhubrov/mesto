@@ -7,6 +7,7 @@
   <meta name="description" content="Страница про живописные места в России">
   <link rel="stylesheet" href="./pages/index.css">
   <link rel="icon" href="./images/logo-icon.svg">
+  <script src="./scripts/script.js" defer></script>
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -15,14 +16,7 @@
   </header>
   <main>
     <section class="profile page__container">
-      <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар пользователя">
-      <div class="profile__info">
-        <div class="profile__container">
-          <h1 class="profile__name text-cut">Жак-Ив Кусто</h1>
-          <button type="button" aria-label="Редактировать" class="profile__btn-edit"></button>
-        </div>
-       <p class="profile__about text-cut">Исследователь океана</p>
-      </div>
+
       <button type="button" aria-label="Добавить" class="profile__btn-add"></button>
     </section>
 
@@ -89,6 +83,16 @@
   </div>
 </div>
 
-<script src="./scripts/script.js"></script>
+<template class="profile-template">
+  <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар пользователя">
+  <div class="profile__info">
+    <div class="profile__container">
+      <h1 class="profile__name text-cut"></h1>
+      <button type="button" aria-label="Редактировать" class="profile__btn-edit"></button>
+    </div>
+   <p class="profile__about text-cut"></p>
+  </div>
+</template>
+
 </body>
 </html>

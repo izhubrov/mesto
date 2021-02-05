@@ -1,40 +1,62 @@
 // Переменные элементов страницы
-let page = document.querySelector('.page');
-let profile = page.querySelector('.profile');
-let popup = page.querySelector('.popup');
-let editForm = page.querySelector('.popup__form');
-let input = editForm.querySelectorAll('.popup__input');
+const page = document.querySelector('.page');
+const popup = page.querySelector('.popup');
+const editForm = page.querySelector('.popup__form');
 
 // Переменные кнопок
-let btnEdit = page.querySelector('.profile__btn-edit');
-let btnClose = page.querySelector('.popup__btn-close');
-let btnSubmit = page.querySelector('.popup__btn-submit');
+const btnClose = page.querySelector('.popup__btn-close');
 
-//Переменные раздела Профиль//
-let profileName = profile.querySelector('.profile__name');
-let profileAbout = profile.querySelector('.profile__about');
+// Заполнили шаблон и добавили на страницу профиль
+const profileTemplate = page.querySelector('.profile-template').content;
+const profileAvatar = profileTemplate.querySelector('.profile__avatar').cloneNode(true);
+const profileInfo = profileTemplate.querySelector('.profile__info').cloneNode(true);
+const profileName = profileInfo.querySelector('.profile__name');
+const profileAbout = profileInfo.querySelector('.profile__about');
+page.querySelector('.profile').prepend(profileAvatar,profileInfo);
+//
 
-//Переменные для input формы Popup//
-let editFormName = popup.querySelector('.popup__input_type_name');
-let editFormAbout = popup.querySelector('.popup__input_type_about');
-
-function showEditForm() {
-  editFormName.value = profileName.textContent;
-  editFormAbout.value = profileAbout.textContent;
-  popup.classList.add('popup__opened');
+function profileOnLoad() {
+  profileAvatar.src = './images/Avatar.png';
+  profileAvatar.alt = 'Аватар пользователя';
+  profileName.textContent = 'Жак-Ив Кусто';
+  profileAbout.textContent = 'Исследователь океана';
 }
 
-function closeEditForm() {
+profileOnLoad();
+
+function setProfile() {
+  const editFormName = popup.querySelector('.popup__input_type_name');
+  const editFormAbout = popup.querySelector('.popup__input_type_about');
+  const btnEdit = profileInfo.querySelector('.profile__btn-edit');
+
+  function showEditForm() {
+    editFormName.value = profileName.textContent;
+    editFormAbout.value = profileAbout.textContent;
+    popup.classList.add('popup__opened');
+  }
+
+  function submitEditForm(evt) {
+    evt.preventDefault();
+    profileName.textContent =  editFormName.value;
+    profileAbout.textContent =  editFormAbout.value;
+    closeForm();
+  }
+
+  btnEdit.addEventListener('click', showEditForm);
+  editForm.addEventListener('submit', submitEditForm);
+}
+
+setProfile();
+
+function closeForm() {
   popup.classList.remove('popup__opened');
 }
 
-function submitEditForm(evt) {
-  evt.preventDefault();
-  profileName.textContent =  editFormName.value;
-  profileAbout.textContent =  editFormAbout.value;
-  closeEditForm(evt);
-}
+btnClose.addEventListener('click', closeForm);
 
-btnEdit.addEventListener('click', showEditForm);
-btnClose.addEventListener('click', closeEditForm);
-editForm.addEventListener('submit', submitEditForm);
+
+
+
+
+
+
