@@ -1,19 +1,15 @@
 // Переменные элементов страницы
 const page = document.querySelector('.page');
 const popup = page.querySelector('.popup');
-const editForm = page.querySelector('.popup__form');
-
-// Переменные кнопок
-const btnClose = page.querySelector('.popup__btn-close');
-
-// Заполнили шаблон и добавили на страницу профиль
+const popupTemplate = page.querySelector('.popup-template').content;
+const profile = page.querySelector('.profile');
+// Шаблон профиля
 const profileTemplate = page.querySelector('.profile-template').content;
 const profileAvatar = profileTemplate.querySelector('.profile__avatar').cloneNode(true);
 const profileInfo = profileTemplate.querySelector('.profile__info').cloneNode(true);
 const profileName = profileInfo.querySelector('.profile__name');
 const profileAbout = profileInfo.querySelector('.profile__about');
-page.querySelector('.profile').prepend(profileAvatar,profileInfo);
-//
+profile.prepend(profileAvatar,profileInfo);
 
 function profileOnLoad() {
   profileAvatar.src = './images/Avatar.png';
@@ -23,36 +19,79 @@ function profileOnLoad() {
 }
 
 profileOnLoad();
+//
 
-function setProfile() {
-  const editFormName = popup.querySelector('.popup__input_type_name');
-  const editFormAbout = popup.querySelector('.popup__input_type_about');
-  const btnEdit = profileInfo.querySelector('.profile__btn-edit');
+// Шаблон формы
 
-  function showEditForm() {
-    editFormName.value = profileName.textContent;
-    editFormAbout.value = profileAbout.textContent;
-    popup.classList.add('popup__opened');
-  }
 
-  function submitEditForm(evt) {
+// const profilePopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
+// const profileFormName = profilePopup.querySelector('.popup__input_type_name');
+// const profileFormAbout = profilePopup.querySelector('.popup__input_type_about');
+
+function editProfileForm() {
+
+  const profilePopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
+  const profileFormName = profilePopup.querySelector('.popup__input_type_name');
+  const profileFormAbout = profilePopup.querySelector('.popup__input_type_about');
+  popup.append(profilePopup);
+
+  profilePopup.querySelector('.popup__title').textContent = 'Редактировать профиль';
+  profilePopup.querySelector('.popup__btn-submit').textContent = 'Сохранить';
+
+  profileFormName.value = profileName.textContent;
+  profileFormAbout.value = profileAbout.textContent;
+  popup.classList.add('popup__opened');
+
+  function submitProfileForm(evt) {
     evt.preventDefault();
-    profileName.textContent =  editFormName.value;
-    profileAbout.textContent =  editFormAbout.value;
+    profileName.textContent =  profileFormName.value;
+    profileAbout.textContent =  profileFormAbout.value;
+    popup.querySelector('.popup__container').remove();
     closeForm();
   }
 
-  btnEdit.addEventListener('click', showEditForm);
-  editForm.addEventListener('submit', submitEditForm);
+  const profileForm = popup.querySelector('.popup__form');
+  const btnClose = page.querySelector('.popup__btn-close');
+  profileForm.addEventListener('submit', submitProfileForm);
+  btnClose.addEventListener('click', closeForm);
 }
 
-setProfile();
+const btnEdit = profileInfo.querySelector('.profile__btn-edit');
+btnEdit.addEventListener('click', editProfileForm);
+
+
+
+function editCardForm() {
+  const cardPopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
+  const cardName = cardPopup.querySelector('.popup__input_type_name');
+  const cardLink = cardPopup.querySelector('.popup__input_type_about');
+  popup.append(cardPopup);
+  cardPopup.querySelector('.popup__title').textContent = 'Новое место';
+  cardPopup.querySelector('.popup__btn-submit').textContent = 'Создать';
+  cardName.placeholder = 'Название';
+  cardLink.placeholder = 'Ссылка на картинку';
+  popup.classList.add('popup__opened');
+  const btnClose = page.querySelector('.popup__btn-close');
+  btnClose.addEventListener('click', closeForm);
+}
+
+const btnAdd = profile.querySelector('.profile__btn-add');
+btnAdd.addEventListener('click', editCardForm);
+
 
 function closeForm() {
   popup.classList.remove('popup__opened');
+  console.log(popup);
+
+  if (popup.querySelector('.popup__container')){
+  popup.querySelector('.popup__container').remove();
+}
 }
 
-btnClose.addEventListener('click', closeForm);
+
+
+
+
 
 
 

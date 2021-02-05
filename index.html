@@ -16,7 +16,6 @@
   </header>
   <main>
     <section class="profile page__container">
-
       <button type="button" aria-label="Добавить" class="profile__btn-add"></button>
     </section>
 
@@ -72,15 +71,6 @@
 </footer>
 
 <div class="popup">
-  <div class="popup__container">
-    <h2 class="popup__title">Редактировать профиль</h2>
-    <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
-    <form class="popup__form" name="popup-form">
-      <input type="text" name="name" class="popup__input popup__input_type_name">
-      <input type="text" name="about" class="popup__input popup__input_type_about">
-      <button type="submit" class="popup__btn-submit">Сохранить</button>
-    </form>
-  </div>
 </div>
 
 <template class="profile-template">
@@ -92,6 +82,18 @@
     </div>
    <p class="profile__about text-cut"></p>
   </div>
+</template>
+
+<template class="popup-template">
+<div class="popup__container">
+  <h2 class="popup__title"></h2>
+  <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
+  <form class="popup__form" name="popup-form">
+    <input type="text" name="name" class="popup__input popup__input_type_name">
+    <input type="text" name="about" class="popup__input popup__input_type_about">
+    <button type="submit" class="popup__btn-submit"></button>
+  </form>
+</div>
 </template>
 
 </body>
