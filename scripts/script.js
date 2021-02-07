@@ -31,6 +31,7 @@ const initialCards = [
   }
 ]; 
 
+
 // Шаблон профиля
 const profileTemplate = page.querySelector('.profile-template').content;
 const profileAvatar = profileTemplate.querySelector('.profile__avatar').cloneNode(true);
@@ -48,7 +49,7 @@ function profileOnLoad() {
 }
 
 profileOnLoad();
-//
+
 
 // Шаблон карточки
 const cardTemplate = page.querySelector('.card-template').content;
@@ -76,18 +77,25 @@ function setCards(newCard) {
 
 setCards();
 
+
+// Закрытие формы
 function closeForm() {
   popup.classList.remove('popup__opened');
+  
+  //Если в Popup есть созданный контейнер (Форма)
   if (popup.querySelector('.popup__container'))
   popup.querySelector('.popup__container').remove();
+
+  //Если в Popup есть созданный контейнер (Изображение)
   if (popup.querySelector('.popup__img-container'))
   popup.querySelector('.popup__img-container').remove();
 }
 
+
 // Шаблон формы
 const popupTemplate = page.querySelector('.popup-template').content;
 
-// Формы профиля пользователя
+// Форма профиля пользователя
 function editProfileForm() {
 
   const profilePopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
@@ -116,6 +124,7 @@ function editProfileForm() {
 
   profileForm.addEventListener('submit', submitProfileForm);
 }
+
 
 // Форма добавления карточки
 function addCardForm() {
@@ -150,32 +159,44 @@ function addCardForm() {
   cardForm.addEventListener('submit', submitCardForm);
 }
 
+
+//Создание полноразмерной карточки через шаблон и ее открытие через Popup
+function fullSizeCard(evt) {
+  const imgTemplate = page.querySelector('.popup-img-template').content;
+  const imgItem = imgTemplate.querySelector('.popup__img-container').cloneNode(true);
+  imgItem.querySelector('.popup__image').src = evt.target.src;
+  imgItem.querySelector('.popup__image').alt = evt.target.alt;
+  const cardName = evt.target.parentElement.querySelector('.cards__title').textContent;
+  imgItem.querySelector('.popup__caption').textContent = cardName;
+  popup.append(imgItem);
+  popup.classList.add('popup__opened');
+}
+
+
+//Обработчики событий
 btnEdit.addEventListener('click', editProfileForm);
 btnAdd.addEventListener('click', addCardForm);
 page.addEventListener('click', (evt) => {
-
+  //Если нажали на кнопку закрытия формы
   if (evt.target.classList.contains('popup__btn-close'))
     closeForm();
 
+  //Если нажали на фон Popup
   if (evt.target.classList.contains('popup'))
     closeForm();
 
+  //Если нажали на кнопку удалить карточку
   if (evt.target.classList.contains('cards__btn-remove'))
     evt.target.parentElement.remove();
 
+  //Если нажали на кнопку лайк
   if (evt.target.classList.contains('cards__btn-like'))
     evt.target.classList.toggle('cards__btn-like_active');
 
+  //Если нажали на карточку для просмотра картинки
   if (evt.target.classList.contains('cards__image'))
     {
-      const imgTemplate = page.querySelector('.popup-img-template').content;
-      const imgItem = imgTemplate.querySelector('.popup__img-container').cloneNode(true);
-      imgItem.querySelector('.popup__image').src = evt.target.src;
-      imgItem.querySelector('.popup__image').alt = evt.target.alt;
-      const cardName = evt.target.parentElement.querySelector('.cards__title').textContent;
-      imgItem.querySelector('.popup__caption').textContent = cardName;
-      popup.append(imgItem);
-      popup.classList.add('popup__opened');
+      fullSizeCard(evt);
     }
 });
 
