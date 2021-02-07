@@ -31,85 +31,37 @@ const initialCards = [
   }
 ]; 
 
-
-// Шаблон профиля
-const profileTemplate = page.querySelector('.profile-template').content;
-const profileAvatar = profileTemplate.querySelector('.profile__avatar').cloneNode(true);
-const profileInfo = profileTemplate.querySelector('.profile__info').cloneNode(true);
+//Форма Профиля
+const profileInfo = page.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
 const profileAbout = profileInfo.querySelector('.profile__about');
 const btnEdit = profileInfo.querySelector('.profile__btn-edit');
-profile.prepend(profileAvatar,profileInfo);
-
-function profileOnLoad() {
-  profileAvatar.src = './images/Avatar.png';
-  profileAvatar.alt = 'Аватар пользователя';
-  profileName.textContent = 'Жак-Ив Кусто';
-  profileAbout.textContent = 'Исследователь океана';
-}
-
-profileOnLoad();
-
-
-// Шаблон карточки
-const cardTemplate = page.querySelector('.card-template').content;
-
-// Отрисовка карточек
-function setCards(newCard) {
-  
-  if(!newCard) {
-    initialCards.forEach(function (item) {
-      const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
-      cardElement.querySelector('.cards__image').src = `${item.link}`;
-      cardElement.querySelector('.cards__image').alt = `Изображение: ${item.name}`;
-      cardElement.querySelector('.cards__title').textContent = `${item.name}`;
-      page.querySelector('.cards').append(cardElement);
-    });
-  }
-  else {
-    const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
-    cardElement.querySelector('.cards__image').src = `${newCard.link}`;
-    cardElement.querySelector('.cards__image').alt = `Изображение: ${newCard.name}`;
-    cardElement.querySelector('.cards__title').textContent = `${newCard.name}`;
-    page.querySelector('.cards').prepend(cardElement);
-  }
-}
-
-setCards();
-
 
 // Закрытие формы
-function closeForm() {
+function closeForm(evt) {
   popup.classList.remove('popup__opened');
-  
-  //Если в Popup есть созданный контейнер (Форма)
-  if (popup.querySelector('.popup__container'))
-  popup.querySelector('.popup__container').remove();
 
-  //Если в Popup есть созданный контейнер (Изображение)
-  if (popup.querySelector('.popup__img-container'))
-  popup.querySelector('.popup__img-container').remove();
+  //Очистили формы
+  if (evt.target.parentElement.classList.contains('popup__container_form'))
+  evt.target.parentElement.classList.remove('popup__container_form');
+
+  if (evt.target.parentElement.classList.contains('popup__container_img'))
+  evt.target.parentElement.classList.remove('popup__container_img');
 }
 
-
-// Шаблон формы
-const popupTemplate = page.querySelector('.popup-template').content;
-
-// Форма профиля пользователя
+// Форма редактирования профиля пользователя
 function editProfileForm() {
 
-  const profilePopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
+  const profilePopup = popup.querySelector('.popup__container_profile');
   const profileFormName = profilePopup.querySelector('.popup__input_type_name');
   const profileFormAbout = profilePopup.querySelector('.popup__input_type_about');
-  popup.append(profilePopup);
-  const profileForm = popup.querySelector('.popup__form');
+  const profileForm = profilePopup.querySelector('.popup__form');
 
   function showProfileForm() {
-    profilePopup.querySelector('.popup__title').textContent = 'Редактировать профиль';
-    profilePopup.querySelector('.popup__btn-submit').textContent = 'Сохранить';
     profileFormName.value = profileName.textContent;
     profileFormAbout.value = profileAbout.textContent;
     popup.classList.add('popup__opened');
+    profilePopup.classList.add('popup__container_form');
   }
 
   showProfileForm();
@@ -118,72 +70,87 @@ function editProfileForm() {
     evt.preventDefault();
     profileName.textContent =  profileFormName.value;
     profileAbout.textContent =  profileFormAbout.value;
-    popup.querySelector('.popup__container').remove();
-    closeForm();
+    closeForm(evt);
   }
 
   profileForm.addEventListener('submit', submitProfileForm);
 }
 
 
+// Шаблон карточки
+const cardTemplate = page.querySelector('.card-template').content;
+
+// Отображаем карточки
+function setCards(card) {
+  
+  //Отображаем начальный массив карточек
+  if(!card) {
+    initialCards.forEach(function (item) {
+      const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
+      cardElement.querySelector('.cards__image').src = `${item.link}`;
+      cardElement.querySelector('.cards__image').alt = `Изображение: ${item.name}`;
+      cardElement.querySelector('.cards__title').textContent = `${item.name}`;
+      page.querySelector('.cards').append(cardElement);
+    });
+  }
+  
+  //Отображаем вновь добавленную карточку
+  else {
+    let newCardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
+    newCardElement.querySelector('.cards__image').src = `${card.link}`;
+    newCardElement.querySelector('.cards__image').alt = `Изображение: ${card.name}`;
+    newCardElement.querySelector('.cards__title').textContent = `${card.name}`;
+    page.querySelector('.cards').prepend(newCardElement);
+  }
+
+}
+setCards();
+
+
 // Форма добавления карточки
-function addCardForm() {
+const cardPopup = popup.querySelector('.popup__container_card');
+const cardName = cardPopup.querySelector('.popup__input_type_name');
+const cardLink = cardPopup.querySelector('.popup__input_type_about');
+const cardForm = cardPopup.querySelector('.popup__form');
 
-  const cardPopup = popupTemplate.querySelector('.popup__container').cloneNode(true);
-  const cardName = cardPopup.querySelector('.popup__input_type_name');
-  const cardLink = cardPopup.querySelector('.popup__input_type_about');
-  popup.append(cardPopup);
-  const cardForm = popup.querySelector('.popup__form');
-
-  function showCardForm() {
-    cardPopup.querySelector('.popup__title').textContent = 'Новое место';
-    cardPopup.querySelector('.popup__btn-submit').textContent = 'Создать';
-    cardName.placeholder = 'Название';
-    cardLink.placeholder = 'Ссылка на картинку';
-    popup.classList.add('popup__opened');
-  }
-
-  showCardForm();
-
-  function submitCardForm(evt) {
-    evt.preventDefault();
-    const newCard = {};
-    newCard.name = cardName.value;
-    newCard.link = cardLink.value;
-    initialCards.unshift(newCard);
-    setCards(newCard);
-    popup.querySelector('.popup__container').remove();
-    closeForm();
-  }
-
-  cardForm.addEventListener('submit', submitCardForm);
+function showCardForm() {
+  popup.classList.add('popup__opened');
+  cardPopup.classList.add('popup__container_form');
 }
 
+function submitCardForm(evt) {
+  evt.preventDefault();
+  initialCards.splice(0,0,{name:'',link:''});
+  initialCards[0].name=cardName.value;
+  initialCards[0].link=cardLink.value;
+  setCards(initialCards[0]);
+  closeForm(evt);
+  cardName.value='';
+  cardLink.value='';
+}
 
-//Создание полноразмерной карточки через шаблон и ее открытие через Popup
+cardForm.addEventListener('submit', submitCardForm);
+
+
+//Popup изображения
 function fullSizeCard(evt) {
-  const imgTemplate = page.querySelector('.popup-img-template').content;
-  const imgItem = imgTemplate.querySelector('.popup__img-container').cloneNode(true);
+  const imgItem = popup.querySelector('.popup__container_imgcard');
   imgItem.querySelector('.popup__image').src = evt.target.src;
   imgItem.querySelector('.popup__image').alt = evt.target.alt;
   const cardName = evt.target.parentElement.querySelector('.cards__title').textContent;
   imgItem.querySelector('.popup__caption').textContent = cardName;
-  popup.append(imgItem);
   popup.classList.add('popup__opened');
+  imgItem.classList.add('popup__container_img');
 }
 
 
 //Обработчики событий
 btnEdit.addEventListener('click', editProfileForm);
-btnAdd.addEventListener('click', addCardForm);
+btnAdd.addEventListener('click', showCardForm);
 page.addEventListener('click', (evt) => {
   //Если нажали на кнопку закрытия формы
   if (evt.target.classList.contains('popup__btn-close'))
-    closeForm();
-
-  //Если нажали на фон Popup
-  if (evt.target.classList.contains('popup'))
-    closeForm();
+    closeForm(evt);
 
   //Если нажали на кнопку удалить карточку
   if (evt.target.classList.contains('cards__btn-remove'))
