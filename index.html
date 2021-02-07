@@ -21,48 +21,6 @@
 
     <section class="places page__container">
       <ul class="cards">
-        <li class="cards__item">
-          <img class="cards__image" src="./images/karachaevsk.jpg" alt="Изображение старинного храма в Карачаево-Черкессии">
-          <div class="cards__description">
-            <h2 class="cards__title text-cut">Карачаевск</h2>
-            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/elbrus.jpg" alt="Изображение горы Эльбрус вдалеке">
-          <div class="cards__description">
-            <h2 class="cards__title text-cut">Гора Эльбрус</h2>
-            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/dombai.jpg" alt="Изображение горной территории Домбая">
-          <div class="cards__description">
-            <h2 class="cards__title text-cut">Домбай</h2>
-            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/elbrus.jpg" alt="Изображение горы Эльбрус вдалеке">
-          <div class="cards__description">
-            <h2 class="cards__title text-cut">Гора Эльбрус</h2>
-            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/dombai.jpg" alt="Изображение горной территории Домбая">
-          <div class="cards__description">
-            <h2 class="cards__title text-cut">Домбай</h2>
-            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/karachaevsk.jpg" alt="Изображение старинного храма в Карачаево-Черкессии">
-          <div class="cards__description">
-            <h2 class="cards__title text-cut">Карачаево-Черкессия</h2>
-            <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
@@ -94,6 +52,27 @@
     <button type="submit" class="popup__btn-submit"></button>
   </form>
 </div>
+</template>
+
+<template class="popup-img-template">
+<div class="popup__img-container">
+  <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
+  <figure class="popup__figure">
+    <img class="popup__image" src="" alt="">
+   <figcaption class="popup__caption"></figcaption>
+  </figure>
+</div>
+</template>
+
+<template class="card-template">
+<li class="cards__item">
+  <img class="cards__image" src="" alt="">
+  <button type="button" aria-label="Удалить" class="cards__btn-remove"></button>
+  <div class="cards__description">
+    <h2 class="cards__title text-cut"></h2>
+    <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
+  </div>
+</li>
 </template>
 
 </body>

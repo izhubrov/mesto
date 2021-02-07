@@ -6,4 +6,5 @@
   justify-content: flex-start;
   border-radius: calc(10/282*100%);
   overflow: hidden;
+  position: relative;
 }
