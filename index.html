@@ -41,7 +41,7 @@
     <h2 class="popup__title">Редактировать профиль</h2>
     <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
     <form class="popup__form" name="popup-form">
-      <input type="text" name="name" class="popup__input popup__input_type_name">
+      <input type="text" name="name" class="popup__input popup__input_type_name" required>
       <input type="text" name="about" class="popup__input popup__input_type_about">
       <button type="submit" class="popup__btn-submit">Сохранить</button>
     </form>
@@ -50,8 +50,8 @@
     <h2 class="popup__title">Новое место</h2>
     <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
     <form class="popup__form" name="popup-form">
-      <input type="text" name="name" placeholder="Название" class="popup__input popup__input_type_name">
-      <input type="text" name="about" placeholder="Ссылка на картинку" class="popup__input popup__input_type_about">
+      <input type="text" name="name" placeholder="Название" class="popup__input popup__input_type_name" required>
+      <input type="text" name="about" placeholder="Ссылка на картинку" class="popup__input popup__input_type_about" required>
       <button type="submit" class="popup__btn-submit">Создать</button>
     </form>
   </div>
