@@ -7,7 +7,8 @@
   <meta name="description" content="Страница про живописные места в России">
   <link rel="stylesheet" href="./pages/index.css">
   <link rel="icon" href="./images/logo-icon.svg">
-  <script src="./scripts/script.js" defer></script>
+  <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/initial-cards.js"></script>
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -37,7 +38,7 @@
 </footer>
 
 <div class="popup">
-  <div class="popup__container popup__container_profile">
+  <div class="popup__container popup__container_form popup__container_profile">
     <h2 class="popup__title">Редактировать профиль</h2>
     <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
     <form class="popup__form" name="popup-form">
@@ -46,7 +47,7 @@
       <button type="submit" class="popup__btn-submit">Сохранить</button>
     </form>
   </div>
-  <div class="popup__container popup__container_card">
+  <div class="popup__container popup__container_form popup__container_card">
     <h2 class="popup__title">Новое место</h2>
     <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
     <form class="popup__form" name="popup-form">
@@ -55,10 +56,10 @@
       <button type="submit" class="popup__btn-submit">Создать</button>
     </form>
   </div>
-  <div class="popup__container popup__container_imgcard">
+  <div class="popup__container popup__container_img">
     <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
     <figure class="popup__figure">
-      <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
+      <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="">
      <figcaption class="popup__caption"></figcaption>
     </figure>
   </div>
