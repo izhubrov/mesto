@@ -52,9 +52,11 @@ function handleEditProfile() {
 
 function submitPopupProfile(evt) {
   evt.preventDefault();
-  profileName.textContent =  popupProfileName.value;
-  profileAbout.textContent =  popupProfileAbout.value;
-  closePopup(popupProfile);
+  if (popupProfileName.value.trim()) {
+    profileName.textContent =  popupProfileName.value;
+    profileAbout.textContent =  popupProfileAbout.value;
+    closePopup(popupProfile);
+  }
 }
 
 
@@ -112,10 +114,12 @@ function handleAddCard() {
 
 function submitPopupCard(evt) {
   evt.preventDefault();
-  const newCard = getItem({name:popupCardName.value, link:popupCardAbout.value});
-  cardsList.prepend(newCard);
-  closePopup(popupCard);
-  popupCardForm.reset();
+  if (popupCardName.value.trim()) {
+    const newCard = getItem({name:popupCardName.value, link:popupCardAbout.value});
+    cardsList.prepend(newCard);
+    closePopup(popupCard);
+    popupCardForm.reset();
+  }
 }
 
 
