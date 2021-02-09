@@ -1,3 +1,4 @@
 .popup__container {
   display: none;
+  position: relative;
 }
