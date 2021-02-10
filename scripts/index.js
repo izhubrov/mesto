@@ -10,7 +10,6 @@ const btnAdd = profile.querySelector('.profile__btn-add');
 const btnEdit = profile.querySelector('.profile__btn-edit');
 
 // Переменные Popup
-//const popup = page.querySelector('.popup');
 const popupProfile = page.querySelector('.popup__container_profile');
 const popupCard = page.querySelector('.popup__container_card');
 const popupImg = page.querySelector('.popup__container_img');
