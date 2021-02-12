@@ -70,13 +70,15 @@ function renderCards() {
 }
 
 // Добавление карточки из шаблона в NodeList
-function getItem(item) {
+function getItem(item,index) {
   const cardElement = cardItem.cloneNode(true);
   const cardImg = cardElement.querySelector('.cards__image');
   const cardTitle = cardElement.querySelector('.cards__title');
   const btnLike = cardElement.querySelector('.cards__btn-like');
   const btnRemove = cardElement.querySelector('.cards__btn-remove');
+  const delay = (1)/(index+4);
 
+  cardElement.style.animationDelay = `${delay}s`;
   cardImg.src = `${item.link}`;
   cardImg.alt = `Изображение: ${item.name}`;
   cardTitle.textContent = `${item.name}`;
