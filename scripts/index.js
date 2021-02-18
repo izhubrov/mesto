@@ -33,15 +33,25 @@ const popupCardName = popupCard.querySelector('.popup__input_type_name');
 const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
 
 
+
+function setEscapeHandler(evt, modalWindowForm) {
+  console.log(modalWindowForm);
+  console.log(evt);
+    if (evt.key === 'Escape') {
+      closePopup(modalWindowForm)
+      clearErrorList(modalWindowForm)
+    }
+}
+
 function openPopup(modalWindowForm) {
   modalWindowForm.classList.add('popup__opened');
-  modalWindowForm.addEventListener('keydown', setEscapeClose);
+  page.addEventListener('keydown', (evt) => setEscapeHandler(evt, modalWindowForm));
 }
 
 
 function closePopup(modalWindowForm) {
   modalWindowForm.classList.remove('popup__opened');
-  modalWindowForm.removeEventListener('keydown', setEscapeClose);
+  page.removeEventListener('keydown', (evt) => setEscapeHandler(evt, modalWindowForm));
 }
 
 function clearErrorList(modalWindowForm) {
@@ -62,9 +72,16 @@ function clearErrorList(modalWindowForm) {
  }
 
 // Работа с формой Popup редактирования профиля пользователя
-function handleEditProfile() {
+
+function setPopupfields() {
   popupProfileName.value = profileName.textContent;
   popupProfileAbout.value = profileAbout.textContent;
+}
+  
+setPopupfields()
+
+function handleEditProfile() {
+  setPopupfields()
   openPopup(popupProfile);
 }
 
@@ -176,17 +193,6 @@ page.addEventListener('mousedown', (evt)=> {
   }
 });
 
-function setEscapeClose(evt) {
-  console.log(evt);
-    if ( !(popupImg.classList.contains('popup__opened')) && (evt.key === 'Escape')) {
-      const popupItem = evt.target.closest('.popup');
-      closePopup(popupItem)
-      clearErrorList(popupItem)
-    } else {
-      const popupItem = popupImg.closest('.popup');
-      closePopup(popupItem)
-      clearErrorList(popupItem)
-    }
-}
+
 
 
