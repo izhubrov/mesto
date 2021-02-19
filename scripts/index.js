@@ -10,6 +10,7 @@ const btnAdd = profile.querySelector('.profile__btn-add');
 const btnEdit = profile.querySelector('.profile__btn-edit');
 
 // Переменные Popup
+const popupList = Array.from(page.querySelectorAll('.popup'));
 const popupProfile = page.querySelector('.popup_type_profile');
 const popupCard = page.querySelector('.popup_type_card');
 const popupImg = page.querySelector('.popup_type_img');
@@ -32,56 +33,75 @@ const popupCardName = popupCard.querySelector('.popup__input_type_name');
 const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
 
 
+// Работа с открытием, закрытием и очисткой Popup от ошибок
 
-function setCloseHandler(evt) {
-  console.log(evt);
-    //Если нажали на клавишу Esc
-    if ((evt.key === 'Escape') && (evt.target.classList.contains('popup__input'))) {
-      closePopup(evt.target.closest('.popup'))
-      clearErrorList(evt.target.closest('.popup'))
-    } //Если нажали на кнопку закрытия Popup или темный фон Overlay
-    else if (evt.target.classList.contains('popup__btn-close') ||
-             evt.target.classList.contains('popup')) {
-        const popupItem = evt.target.closest('.popup');
-        closePopup(popupItem)
-        clearErrorList(popupItem)
-    }
+// Очистим ошибки в Popup (после ее закрытия на крестик)
+function clearErrors(modalWindowForm) {
+
+  //Формы увеличения картинки не содержит ошибок при валидации, выходим из функции
+  if (modalWindowForm === popupImg) {
+    return;
   }
 
-function openPopup(modalWindowForm) {
-  modalWindowForm.classList.add('popup__opened');
-  modalWindowForm.addEventListener('keyup', setCloseHandler);
-  modalWindowForm.addEventListener('click', setCloseHandler);//close button и overlay
-}
-
-function closePopup(modalWindowForm) {
-  modalWindowForm.classList.remove('popup__opened');
-
-  const inputList = Array.from(modalWindowForm.querySelectorAll('.popup__input'));
-
-  inputList.forEach((inputElement) => {
-    inputElement.removeEventListener('keyup', setCloseHandler);
-  })
-
-  modalWindowForm.removeEventListener('click', setCloseHandler);//close button и overlay
-}
-
-function clearErrorList(modalWindowForm) {
   const errorList = Array.from(modalWindowForm.querySelectorAll('.popup__input-error_active'));
   const inputErrorList = Array.from(modalWindowForm.querySelectorAll('.popup__input_type_error'));
 
   if (errorList !== []) {
     errorList.forEach((errorElement) => {
     errorElement.textContent='';
+    errorElement.classList.remove('popup__input-error_active');
     })
   }
 
-  if(inputErrorList !== []) {
+  if (inputErrorList !== []) {
     inputErrorList.forEach((inputErrorElement) => {
       inputErrorElement.classList.remove('popup__input_type_error');
     })
   }
- }
+}
+
+function findOpenedPopup() {
+  const popupElement = popupList.find (
+    element => element.classList.contains('popup__opened')
+  )
+  return popupElement;
+}
+
+function closePopupWithEscape(evt) {
+  const openedPopup = findOpenedPopup();
+
+  if ( (evt.key === 'Escape') && openedPopup ) {
+    clearErrors(openedPopup)
+    closePopup(openedPopup)
+  }
+}
+
+function closePopupWithClick(evt) {
+  if (evt.target.classList.contains('popup__btn-close') ||
+      evt.target.classList.contains('popup')) {
+      const popupItem = evt.target.closest('.popup');
+      clearErrors(popupItem)
+      closePopup(popupItem)
+  }
+}
+
+function setCloseHandlers(evt) {
+  closePopupWithEscape(evt)
+  closePopupWithClick(evt)
+}
+
+function openPopup(modalWindowForm) {
+  modalWindowForm.classList.add('popup__opened');
+  page.addEventListener('keyup', setCloseHandlers);//закрытие по нажатию Escape
+  modalWindowForm.addEventListener('mousedown', setCloseHandlers);//закрытие с close button или overlay
+}
+
+function closePopup(modalWindowForm) {
+  modalWindowForm.classList.remove('popup__opened');
+  page.removeEventListener('keyup', setCloseHandlers);
+  modalWindowForm.removeEventListener('mousedown', setCloseHandlers);
+}
+
 
 // Работа с формой Popup редактирования профиля пользователя
 
