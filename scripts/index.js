@@ -10,7 +10,6 @@ const btnAdd = profile.querySelector('.profile__btn-add');
 const btnEdit = profile.querySelector('.profile__btn-edit');
 
 // Переменные Popup
-const popupList = page.querySelectorAll('.popup');
 const popupProfile = page.querySelector('.popup_type_profile');
 const popupCard = page.querySelector('.popup_type_card');
 const popupImg = page.querySelector('.popup_type_img');
@@ -34,24 +33,37 @@ const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
 
 
 
-function setEscapeHandler(evt, modalWindowForm) {
-  console.log(modalWindowForm);
+function setCloseHandler(evt) {
   console.log(evt);
-    if (evt.key === 'Escape') {
-      closePopup(modalWindowForm)
-      clearErrorList(modalWindowForm)
+    //Если нажали на клавишу Esc
+    if ((evt.key === 'Escape') && (evt.target.classList.contains('popup__input'))) {
+      closePopup(evt.target.closest('.popup'))
+      clearErrorList(evt.target.closest('.popup'))
+    } //Если нажали на кнопку закрытия Popup или темный фон Overlay
+    else if (evt.target.classList.contains('popup__btn-close') ||
+             evt.target.classList.contains('popup')) {
+        const popupItem = evt.target.closest('.popup');
+        closePopup(popupItem)
+        clearErrorList(popupItem)
     }
-}
+  }
 
 function openPopup(modalWindowForm) {
   modalWindowForm.classList.add('popup__opened');
-  page.addEventListener('keydown', (evt) => setEscapeHandler(evt, modalWindowForm));
+  modalWindowForm.addEventListener('keyup', setCloseHandler);
+  modalWindowForm.addEventListener('click', setCloseHandler);//close button и overlay
 }
-
 
 function closePopup(modalWindowForm) {
   modalWindowForm.classList.remove('popup__opened');
-  page.removeEventListener('keydown', (evt) => setEscapeHandler(evt, modalWindowForm));
+
+  const inputList = Array.from(modalWindowForm.querySelectorAll('.popup__input'));
+
+  inputList.forEach((inputElement) => {
+    inputElement.removeEventListener('keyup', setCloseHandler);
+  })
+
+  modalWindowForm.removeEventListener('click', setCloseHandler);//close button и overlay
 }
 
 function clearErrorList(modalWindowForm) {
@@ -77,7 +89,7 @@ function setPopupfields() {
   popupProfileName.value = profileName.textContent;
   popupProfileAbout.value = profileAbout.textContent;
 }
-  
+
 setPopupfields()
 
 function handleEditProfile() {
@@ -173,26 +185,3 @@ btnEdit.addEventListener('click', handleEditProfile);
 btnAdd.addEventListener('click', handleAddCard);
 popupProfileForm.addEventListener('submit', submitPopupProfile);
 popupCardForm.addEventListener('submit', submitPopupCard);
-
-//Если нажали на кнопку закрытия Popup
-page.addEventListener('click', (evt)=> {
-  if (evt.target.classList.contains('popup__btn-close')) {
-    const popupItem = evt.target.closest('.popup');
-    closePopup(popupItem)
-    clearErrorList(popupItem)
-  }
-});
-
-//Если нажали на фон
-//Вынесено отдельно, чтобы исключить случай выноса курсора мыши на overlay при выделении всего поля input
-page.addEventListener('mousedown', (evt)=> {
-  if (evt.target.classList.contains('popup')) {
-    const popupItem = evt.target.closest('.popup');
-    closePopup(popupItem)
-    clearErrorList(popupItem)
-  }
-});
-
-
-
-
