@@ -43,7 +43,6 @@ function closePopupWithEscape(evt) {
   const openedPopup = findOpenedPopup();
 
   if ( (evt.key === 'Escape') && openedPopup ) {
-    // clearErrors(openedPopup)
     closePopup(openedPopup)
   }
 }
@@ -52,7 +51,6 @@ function closePopupWithClick(evt) {
   if (evt.target.classList.contains('popup__btn-close') ||
       evt.target.classList.contains('popup')) {
       const popupItem = evt.target.closest('.popup');
-      // clearErrors(popupItem)
       closePopup(popupItem)
   }
 }
