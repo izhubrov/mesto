@@ -10,7 +10,6 @@ const btnAdd = profile.querySelector('.profile__btn-add');
 const btnEdit = profile.querySelector('.profile__btn-edit');
 
 // Переменные Popup
-const popupList = Array.from(page.querySelectorAll('.popup'));
 const popupProfile = page.querySelector('.popup_type_profile');
 const popupCard = page.querySelector('.popup_type_card');
 const popupImg = page.querySelector('.popup_type_img');
@@ -33,37 +32,10 @@ const popupCardName = popupCard.querySelector('.popup__input_type_name');
 const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
 
 
-// Работа с открытием, закрытием и очисткой Popup от ошибок
-
-// Очистим ошибки в Popup (после ее закрытия на крестик)
-function clearErrors(modalWindowForm) {
-
-  //Формы увеличения картинки не содержит ошибок при валидации, выходим из функции
-  if (modalWindowForm === popupImg) {
-    return;
-  }
-
-  const errorList = Array.from(modalWindowForm.querySelectorAll('.popup__input-error_active'));
-  const inputErrorList = Array.from(modalWindowForm.querySelectorAll('.popup__input_type_error'));
-
-  if (errorList !== []) {
-    errorList.forEach((errorElement) => {
-    errorElement.textContent='';
-    errorElement.classList.remove('popup__input-error_active');
-    })
-  }
-
-  if (inputErrorList !== []) {
-    inputErrorList.forEach((inputErrorElement) => {
-      inputErrorElement.classList.remove('popup__input_type_error');
-    })
-  }
-}
+// Работа с открытием, закрытием Popup
 
 function findOpenedPopup() {
-  const popupElement = popupList.find (
-    element => element.classList.contains('popup__opened')
-  )
+  const popupElement = page.querySelector('.popup__opened');
   return popupElement;
 }
 
@@ -71,7 +43,7 @@ function closePopupWithEscape(evt) {
   const openedPopup = findOpenedPopup();
 
   if ( (evt.key === 'Escape') && openedPopup ) {
-    clearErrors(openedPopup)
+    // clearErrors(openedPopup)
     closePopup(openedPopup)
   }
 }
@@ -80,7 +52,7 @@ function closePopupWithClick(evt) {
   if (evt.target.classList.contains('popup__btn-close') ||
       evt.target.classList.contains('popup')) {
       const popupItem = evt.target.closest('.popup');
-      clearErrors(popupItem)
+      // clearErrors(popupItem)
       closePopup(popupItem)
   }
 }
@@ -105,15 +77,15 @@ function closePopup(modalWindowForm) {
 
 // Работа с формой Popup редактирования профиля пользователя
 
-function setPopupfields() {
+function setPopupProfilefields() {
   popupProfileName.value = profileName.textContent;
   popupProfileAbout.value = profileAbout.textContent;
 }
 
-setPopupfields()
+setPopupProfilefields()
 
 function handleEditProfile() {
-  setPopupfields()
+  setPopupProfilefields()
   openPopup(popupProfile);
 }
 
@@ -180,12 +152,14 @@ renderCards();
 
 
 // Работа с формой Popup добавления карточки
+
 function handleAddCard() {
   openPopup(popupCard);
   popupCardForm.reset();
 }
 
 function submitPopupCard(evt) {
+
   evt.preventDefault();
   if (popupCardName.value.trim()) {
     const newCard = getItem({name:popupCardName.value, link:popupCardAbout.value});

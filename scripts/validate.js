@@ -1,3 +1,5 @@
+// const btnAdd = document.querySelector('.profile__btn-add');
+// const btnEdit = document.querySelector('.profile__btn-edit');
 
 const showInputError = function(validationSettings, formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`${validationSettings.errorSelector}_type_${inputElement.name}`);
@@ -43,6 +45,7 @@ const setEventListeners = function(validationSettings, formElement) {
   toggleButtonState(validationSettings, inputList, buttonElement)
 
   inputList.forEach((inputElement) => {
+    inputElement.classList.remove(validationSettings.inputErrorClass)
     inputElement.addEventListener('input', () => {
       checkInputValidity(validationSettings, formElement, inputElement)
       toggleButtonState(validationSettings, inputList, buttonElement)
@@ -51,10 +54,15 @@ const setEventListeners = function(validationSettings, formElement) {
 
 };
 
-function enableValidation(validationSettings) {
-  const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
-  formList.forEach((formElement) => {
 
+function enableValidation(validationSettings) {
+  // Очистим ошибки в Popup
+  btnAdd.addEventListener('click', (evt) => clearErrors(evt, validationSettings));
+  btnEdit.addEventListener('click', (evt) => clearErrors(evt, validationSettings));
+
+  const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+
+  formList.forEach((formElement) => {
     const fieldSetList = Array.from(formElement.querySelectorAll(validationSettings.fieldSetSelector));
     fieldSetList.forEach((fieldSet) => {
       setEventListeners(validationSettings, fieldSet)
@@ -72,3 +80,32 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   activeErrorClass: 'popup__input-error_active'
 })
+
+function setPopupCardSubmitToInitial(evt, validationSettings) {
+  if (evt.target.classList.value === btnAdd.classList.value) {
+    popupCard.querySelector(validationSettings.submitButtonSelector).setAttribute('disabled',true);
+    popupCard.querySelector(validationSettings.submitButtonSelector).classList.add(validationSettings.inactiveButtonClass)
+  }
+}
+
+// Функция очистки ошибок в Popup
+function clearErrors(evt, validationSettings) {
+
+  const errorList = Array.from(document.querySelectorAll(`.${validationSettings.activeErrorClass}`));
+  const inputErrorList = Array.from(document.querySelectorAll(`.${validationSettings.inputErrorClass}`));
+
+  setPopupCardSubmitToInitial(evt, validationSettings)
+
+  if (errorList !== []) {
+    errorList.forEach((errorElement) => {
+    errorElement.textContent='';
+    errorElement.classList.remove(validationSettings.activeErrorClass);
+    })
+  }
+
+  if (inputErrorList !== []) {
+    inputErrorList.forEach((inputErrorElement) => {
+      inputErrorElement.classList.remove(validationSettings.inputErrorClass);
+    })
+  }
+}
