@@ -10,7 +10,6 @@
 .cards__item {
   animation: appear .5s ease-in-out;
   animation-fill-mode: both;
-  transition: all 2s ease-in-out;
   width: 100%;
   display: flex;
   flex-direction: column;
