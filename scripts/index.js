@@ -85,8 +85,8 @@ function handleEditProfile() {
 function submitPopupProfile(evt) {
   evt.preventDefault();
   if (popupProfileName.value.trim()) {
-    profileName.textContent =  popupProfileName.value;
-    profileAbout.textContent =  popupProfileAbout.value;
+    profileName.textContent =  popupProfileName.value.trim();
+    profileAbout.textContent =  popupProfileAbout.value.trim();
     closePopup(popupProfile);
   }
   else {
