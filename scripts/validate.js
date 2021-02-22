@@ -1,5 +1,3 @@
-// const btnAdd = document.querySelector('.profile__btn-add');
-// const btnEdit = document.querySelector('.profile__btn-edit');
 
 const showInputError = function(validationSettings, formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`${validationSettings.errorSelector}_type_${inputElement.name}`);

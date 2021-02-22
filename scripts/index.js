@@ -55,21 +55,16 @@ function closePopupWithClick(evt) {
   }
 }
 
-function setCloseHandlers(evt) {
-  closePopupWithEscape(evt)
-  closePopupWithClick(evt)
-}
-
 function openPopup(modalWindowForm) {
   modalWindowForm.classList.add('popup__opened');
-  page.addEventListener('keyup', setCloseHandlers);//закрытие по нажатию Escape
-  modalWindowForm.addEventListener('mousedown', setCloseHandlers);//закрытие с close button или overlay
+  page.addEventListener('keyup', closePopupWithEscape);//закрытие по нажатию Escape
+  modalWindowForm.addEventListener('mousedown', closePopupWithClick);//закрытие с close button или overlay
 }
 
 function closePopup(modalWindowForm) {
   modalWindowForm.classList.remove('popup__opened');
-  page.removeEventListener('keyup', setCloseHandlers);
-  modalWindowForm.removeEventListener('mousedown', setCloseHandlers);
+  page.removeEventListener('keyup', closePopupWithEscape);
+  modalWindowForm.removeEventListener('mousedown', closePopupWithClick);
 }
 
 
