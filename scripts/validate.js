@@ -87,8 +87,7 @@ function setPopupCardSubmitToInitial(evt, validationSettings) {
 }
 
 // Функция очистки ошибок в Popup
-function clearErrors(evt, validationSettings) {
-
+function clearErrors(evt,validationSettings) {
   const errorList = Array.from(document.querySelectorAll(`.${validationSettings.activeErrorClass}`));
   const inputErrorList = Array.from(document.querySelectorAll(`.${validationSettings.inputErrorClass}`));
 
