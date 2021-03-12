@@ -6,5 +6,7 @@ export const validationSettings = {
   submitButtonSelector: '.popup__btn-submit',
   inactiveButtonClass: 'popup__btn-submit_inactive',
   inputErrorClass: 'popup__input_type_error',
-  activeErrorClass: 'popup__input-error_active'
+  activeErrorClass: 'popup__input-error_active',
+  btnAddSelector:'.profile__btn-add',
+  btnEditSelector:'.profile__btn-edit'
 }

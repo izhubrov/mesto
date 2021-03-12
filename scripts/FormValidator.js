@@ -1,5 +1,3 @@
-import {btnAdd, btnEdit} from './index.js';
-
 export default class FormValidator {
 
   constructor(validationSettings,modalWindowForm) {
@@ -61,7 +59,7 @@ export default class FormValidator {
   };
 
   _setPopupCardSubmitToInitial(evt) {
-    if (evt.target.classList.value === btnAdd.classList.value) {
+    if (evt.target.classList.value === document.querySelector(this._validationSettings.btnAddSelector).classList.value) {
       this._modalWindowForm.querySelector(this._validationSettings.submitButtonSelector).setAttribute('disabled',true);
       this._modalWindowForm.querySelector(this._validationSettings.submitButtonSelector).classList.add(this._validationSettings.inactiveButtonClass);
     }
@@ -89,9 +87,10 @@ export default class FormValidator {
   }
 
   enableValidation() {
+
     // Очистим ошибки в Popup
-    btnAdd.addEventListener('click', (evt) => this._clearErrors(evt));
-    btnEdit.addEventListener('click', (evt) => this._clearErrors(evt));
+    document.querySelector(this._validationSettings.btnAddSelector).addEventListener('click', (evt) => this._clearErrors(evt));
+    document.querySelector(this._validationSettings.btnEditSelector).addEventListener('click', (evt) => this._clearErrors(evt));
 
     const formList = Array.from(this._modalWindowForm.querySelectorAll(this._validationSettings.formSelector));
 

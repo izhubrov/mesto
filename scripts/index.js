@@ -1,20 +1,21 @@
+import FormValidator from './FormValidator.js';
+import {validationSettings} from './validationSettings.js';
+import Card from './Card.js';
+import {initialCards} from './initial-cards.js';
+
 // Переменные элементов page
 const page = document.querySelector('.page');
 const cardsList = page.querySelector('.cards');
-const cardTemplate = page.querySelector('.card-template').content;
-const cardItem = cardTemplate.querySelector('.cards__item')
 const profile = page.querySelector('.profile');
 
 // Переменные кнопок
-export const btnAdd = profile.querySelector('.profile__btn-add');
-export const btnEdit = profile.querySelector('.profile__btn-edit');
+const btnAdd = profile.querySelector('.profile__btn-add');
+const btnEdit = profile.querySelector('.profile__btn-edit');
 
 // Переменные Popup
 const popupProfile = page.querySelector('.popup_type_profile');
 const popupCard = page.querySelector('.popup_type_card');
-export const popupImg = document.querySelector('.popup_type_img');
-export const imgItem = popupImg.querySelector('.popup__image');
-export const imgPopupCaption = popupImg.querySelector('.popup__caption');
+
 
 // Переменные полей Profile
 const profileInfo = profile.querySelector('.profile__info');
@@ -55,10 +56,7 @@ function closePopupWithClick(evt) {
   }
 }
 
-import FormValidator from './FormValidator.js';
-import {validationSettings} from './validationSettings.js';
-
-export function openPopup(modalWindowForm) {
+function openPopup(modalWindowForm) {
 
   const formValidator = new FormValidator(validationSettings, modalWindowForm);
   formValidator.enableValidation();
@@ -102,15 +100,12 @@ function submitPopupProfile(evt) {
 }
 
 
-// Работа с отображением карточек
-
-import Card from './Card.js';
-import {initialCards} from './initial-cards.js';
 //Отображаем изначальные карточки
 function renderCards() {
 
   const cardsArr = initialCards.map((item) => {
     const newCard = new Card(item, '.card-template');
+
     return newCard.generateCard();
   });
   cardsList.append(...cardsArr);

@@ -1,5 +1,3 @@
-import {popupImg, imgItem, imgPopupCaption, openPopup} from './index.js';
-
 export default class Card {
 
   constructor(data, templateSelector) {
@@ -32,7 +30,7 @@ export default class Card {
     this._elementsOfCard.cardImg.addEventListener('error', () => this._handleRemove());
   }
 
-  _handleLike(evt) {
+  _handleLike() {
     this._elementsOfCard.btnLike.classList.toggle('cards__btn-like_active');
   }
 
@@ -41,19 +39,48 @@ export default class Card {
     this._element = null;
   }
 
-  //Popup увеличения изображения
+  // Popup увеличения изображения
+
+  _openPopup(modalWindowForm) {
+    modalWindowForm.classList.add('popup__opened');
+    document.addEventListener('keyup',(evt) => this._closePopupWithEscape(evt) );//закрытие по нажатию Escape
+    modalWindowForm.addEventListener('mousedown', (evt) => this._closePopupWithClick(evt) );//закрытие с close button или overlay
+  }
+
+  _closePopupWithEscape(evt) {
+    if (evt.key === 'Escape') {
+      this._closePopup(this._popupImg)
+    }
+  }
+
+  _closePopupWithClick(evt) {
+    if (evt.target.classList.contains('popup__btn-close') ||
+    evt.target.classList.contains('popup')) {
+      this._closePopup(this._popupImg)
+    }
+  }
+
+  _closePopup(modalWindowForm) {
+    modalWindowForm.classList.remove('popup__opened');
+  }
+
   _handlePreviewCard() {
+    const popupImg = document.querySelector('.popup_type_img');
+    const imgItem = popupImg.querySelector('.popup__image');
+    const imgPopupCaption = popupImg.querySelector('.popup__caption');
+
     imgItem.src = this._link;
     imgItem.alt = `Изображение ${this._name}`;
     imgPopupCaption.textContent = this._name;
-    openPopup(popupImg);
+    this._popupImg = popupImg;
+    this._openPopup(this._popupImg);
   }
 
   generateCard() {
     this._element = this._getTemplate();
 
     this._elementsOfCard = this._getElementsOfCard();
-    this._delay = 1/2;
+    this._delay = 1/6;
     this._element.style.animationDelay = `${this._delay}s`;
     this._elementsOfCard.cardImg.src = this._link;
     this._elementsOfCard.cardImg.alt = this._name;
