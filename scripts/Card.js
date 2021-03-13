@@ -1,3 +1,26 @@
+const popupImg = document.querySelector('.popup_type_img');
+const imgItem = popupImg.querySelector('.popup__image');
+const imgPopupCaption = popupImg.querySelector('.popup__caption');
+
+function closePopupCardWithEscape(evt) {
+  if (evt.key === 'Escape') {
+    closePopupCard(popupImg);
+  }
+}
+
+function closePopupCardWithClick(evt) {
+  if (evt.target.classList.contains('popup__btn-close') ||
+  evt.target.classList.contains('popup')) {
+    closePopupCard(popupImg)
+  }
+}
+
+function closePopupCard(modalWindowForm) {
+  modalWindowForm.classList.remove('popup__opened');
+  document.removeEventListener('keyup', closePopupCardWithEscape);
+  modalWindowForm.removeEventListener('mousedown', closePopupCardWithClick);
+}
+
 export default class Card {
 
   constructor(data, templateSelector) {
@@ -39,54 +62,29 @@ export default class Card {
     this._element = null;
   }
 
-  // Popup увеличения изображения
-
-  _openPopup(modalWindowForm) {
-    modalWindowForm.classList.add('popup__opened');
-    document.addEventListener('keyup',(evt) => this._closePopupWithEscape(evt) );//закрытие по нажатию Escape
-    modalWindowForm.addEventListener('mousedown', (evt) => this._closePopupWithClick(evt) );//закрытие с close button или overlay
-  }
-
-  _closePopupWithEscape(evt) {
-    if (evt.key === 'Escape') {
-      this._closePopup(this._popupImg)
-    }
-  }
-
-  _closePopupWithClick(evt) {
-    if (evt.target.classList.contains('popup__btn-close') ||
-    evt.target.classList.contains('popup')) {
-      this._closePopup(this._popupImg)
-    }
-  }
-
-  _closePopup(modalWindowForm) {
-    modalWindowForm.classList.remove('popup__opened');
-  }
-
+   // Popup увеличения изображения 
   _handlePreviewCard() {
-    const popupImg = document.querySelector('.popup_type_img');
-    const imgItem = popupImg.querySelector('.popup__image');
-    const imgPopupCaption = popupImg.querySelector('.popup__caption');
-
     imgItem.src = this._link;
     imgItem.alt = `Изображение ${this._name}`;
     imgPopupCaption.textContent = this._name;
-    this._popupImg = popupImg;
-    this._openPopup(this._popupImg);
+
+    popupImg.classList.add('popup__opened');
+    document.addEventListener('keyup', closePopupCardWithEscape);//закрытие по нажатию Escape
+    popupImg.addEventListener('mousedown', closePopupCardWithClick);//закрытие с close button или overlay
   }
 
   generateCard() {
     this._element = this._getTemplate();
-
     this._elementsOfCard = this._getElementsOfCard();
-    this._delay = 1/6;
-    this._element.style.animationDelay = `${this._delay}s`;
+
     this._elementsOfCard.cardImg.src = this._link;
     this._elementsOfCard.cardImg.alt = this._name;
     this._elementsOfCard.cardTitle.textContent = this._name;
-
+    
     this._setEventListeners();
+
+    this._delay = 1/6;
+    this._element.style.animationDelay = `${this._delay}s`;
 
     return this._element;
   }
