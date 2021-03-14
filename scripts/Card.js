@@ -1,32 +1,10 @@
-const popupImg = document.querySelector('.popup_type_img');
-const imgItem = popupImg.querySelector('.popup__image');
-const imgPopupCaption = popupImg.querySelector('.popup__caption');
-
-function closePopupCardWithEscape(evt) {
-  if (evt.key === 'Escape') {
-    closePopupCard(popupImg);
-  }
-}
-
-function closePopupCardWithClick(evt) {
-  if (evt.target.classList.contains('popup__btn-close') ||
-  evt.target.classList.contains('popup')) {
-    closePopupCard(popupImg)
-  }
-}
-
-function closePopupCard(modalWindowForm) {
-  modalWindowForm.classList.remove('popup__opened');
-  document.removeEventListener('keyup', closePopupCardWithEscape);
-  modalWindowForm.removeEventListener('mousedown', closePopupCardWithClick);
-}
-
 export default class Card {
 
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, openPopupImg) {
     this._name = data.name;
     this._link = data.link;
     this._selector = templateSelector;
+    this._openPopupImg = openPopupImg;
   }
 
   _getTemplate() {
@@ -49,7 +27,7 @@ export default class Card {
   _setEventListeners() {
     this._elementsOfCard.btnLike.addEventListener('click', () => this._handleLike());
     this._elementsOfCard.btnRemove.addEventListener('click', () => this._handleRemove());
-    this._elementsOfCard.cardImg.addEventListener('click', () => this._handlePreviewCard());
+    this._elementsOfCard.cardImg.addEventListener('click', () => this._openPopupImg(this._name, this._link))
     this._elementsOfCard.cardImg.addEventListener('error', () => this._handleRemove());
   }
 
@@ -60,17 +38,6 @@ export default class Card {
   _handleRemove() {
     this._element.remove();
     this._element = null;
-  }
-
-   // Popup увеличения изображения 
-  _handlePreviewCard() {
-    imgItem.src = this._link;
-    imgItem.alt = `Изображение ${this._name}`;
-    imgPopupCaption.textContent = this._name;
-
-    popupImg.classList.add('popup__opened');
-    document.addEventListener('keyup', closePopupCardWithEscape);//закрытие по нажатию Escape
-    popupImg.addEventListener('mousedown', closePopupCardWithClick);//закрытие с close button или overlay
   }
 
   generateCard() {

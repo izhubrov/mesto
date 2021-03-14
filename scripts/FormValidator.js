@@ -1,35 +1,35 @@
 export default class FormValidator {
 
-  constructor(validationSettings,modalWindowForm) {
+  constructor(validationSettings,formElement) {
     this._validationSettings = validationSettings;
-    this._modalWindowForm = modalWindowForm;
+    this._formElement = formElement;
   }
 
-  _showInputError (formElement, inputElement, errorMessage) {
-    const errorElement = formElement.querySelector(`${this._validationSettings.errorSelector}_type_${inputElement.name}`);
+  _showInputError (fieldSet, inputElement, errorMessage) {
+    const errorElement = fieldSet.querySelector(`${this._validationSettings.errorSelector}_type_${inputElement.name}`);
     inputElement.classList.add(this._validationSettings.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._validationSettings.activeErrorClass);
   };
 
-  _hideInputError (formElement, inputElement) {
-    const errorElement = formElement.querySelector(`${this._validationSettings.errorSelector}_type_${inputElement.name}`);
+  _hideInputError (fieldSet, inputElement) {
+    const errorElement = fieldSet.querySelector(`${this._validationSettings.errorSelector}_type_${inputElement.name}`);
     inputElement.classList.remove(this._validationSettings.inputErrorClass);
     errorElement.textContent = '';
     errorElement.classList.remove(this._validationSettings.activeErrorClass);
   }
 
-  _checkInputValidity (formElement, inputElement) {
+  _checkInputValidity (fieldSet, inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(formElement, inputElement, inputElement.validationMessage)
+      this._showInputError(fieldSet, inputElement, inputElement.validationMessage)
     } else {
-      this._hideInputError(formElement, inputElement)
+      this._hideInputError(fieldSet, inputElement)
     }
   };
 
   _hasInvalidInput (inputList) {
     return inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
+      return !(inputElement.validity.valid && inputElement.value.trim());
     });
   }
 
@@ -43,34 +43,35 @@ export default class FormValidator {
     }
   }
 
-  _setEventListeners (formElement) {
-    const inputList = Array.from(formElement.querySelectorAll(this._validationSettings.inputSelector));
-    const buttonElement = formElement.querySelector(this._validationSettings.submitButtonSelector);
+  _setEventListeners (fieldSet) {
+    //Насколько я понимаю, inputList и buttonElement нельзя вынести в поле класса, потому что это fieldset, и по идее, таких
+    //наборов полей может быть несколько...И если привязывать здесь поиск к this._formElement, то
+    //тогда эти два набора полей станут зависимыми...А в форме может быть не один inputList и не одна кнопка...
+    //Если их вынести в свойства в конструктор, тогда если добавить новый fieldset в разметку, в этот this._formElement,
+    //тогда вторая кнопка не будет реагировать на валидацию ее inputList...
+    const inputList = Array.from(fieldSet.querySelectorAll(this._validationSettings.inputSelector));
+    const buttonElement = fieldSet.querySelector(this._validationSettings.submitButtonSelector);
     this._toggleButtonState(inputList, buttonElement)
 
     inputList.forEach((inputElement) => {
       inputElement.classList.remove(this._validationSettings.inputErrorClass)
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(formElement, inputElement)
+        this._checkInputValidity(fieldSet, inputElement)
         this._toggleButtonState(inputList, buttonElement)
       });
     });
 
   };
 
-  _setPopupCardSubmitToInitial(evt) {
-    if (evt.target.classList.value === document.querySelector(this._validationSettings.btnAddSelector).classList.value) {
-      this._modalWindowForm.querySelector(this._validationSettings.submitButtonSelector).setAttribute('disabled',true);
-      this._modalWindowForm.querySelector(this._validationSettings.submitButtonSelector).classList.add(this._validationSettings.inactiveButtonClass);
-    }
+  setPopupCardSubmitToInitial() {
+    this._formElement.querySelector(this._validationSettings.submitButtonSelector).setAttribute('disabled',true);
+    this._formElement.querySelector(this._validationSettings.submitButtonSelector).classList.add(this._validationSettings.inactiveButtonClass);
   }
 
   // Функция очистки ошибок в Popup
-  _clearErrors(evt) {
-    const errorList = Array.from(this._modalWindowForm.querySelectorAll(`.${this._validationSettings.activeErrorClass}`));
-    const inputErrorList = Array.from(this._modalWindowForm.querySelectorAll(`.${this._validationSettings.inputErrorClass}`));
-
-    this._setPopupCardSubmitToInitial(evt);
+  clearErrors(evt) {
+    const errorList = Array.from(this._formElement.querySelectorAll(`.${this._validationSettings.activeErrorClass}`));
+    const inputErrorList = Array.from(this._formElement.querySelectorAll(`.${this._validationSettings.inputErrorClass}`));
 
     if (errorList !== []) {
       errorList.forEach((errorElement) => {
@@ -88,19 +89,8 @@ export default class FormValidator {
 
   enableValidation() {
 
-    // Очистим ошибки в Popup
-    document.querySelector(this._validationSettings.btnAddSelector).addEventListener('click', (evt) => this._clearErrors(evt));
-    document.querySelector(this._validationSettings.btnEditSelector).addEventListener('click', (evt) => this._clearErrors(evt));
-
-    const formList = Array.from(this._modalWindowForm.querySelectorAll(this._validationSettings.formSelector));
-
-    this._formList = formList;
-
-    this._formList.forEach((formElement) => {
-      const fieldSetList = Array.from(formElement.querySelectorAll(this._validationSettings.fieldSetSelector));
-      fieldSetList.forEach((fieldSet) => {
-        this._setEventListeners(fieldSet)
-      });
-    });
+    const fieldSetList = Array.from(this._formElement.querySelectorAll(this._validationSettings.fieldSetSelector));
+    
+    fieldSetList.forEach((fieldSet) => this._setEventListeners(fieldSet));
   }
 }
