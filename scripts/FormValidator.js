@@ -69,7 +69,7 @@ export default class FormValidator {
   }
 
   // Функция очистки ошибок в Popup
-  clearErrors(evt) {
+  clearErrors() {
     const errorList = Array.from(this._formElement.querySelectorAll(`.${this._validationSettings.activeErrorClass}`));
     const inputErrorList = Array.from(this._formElement.querySelectorAll(`.${this._validationSettings.inputErrorClass}`));
 
