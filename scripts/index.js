@@ -15,7 +15,9 @@ const btnEdit = profile.querySelector('.profile__btn-edit');
 // Переменные Popup
 const popupProfile = page.querySelector('.popup_type_profile');
 const popupCard = page.querySelector('.popup_type_card');
-
+const popupImg = document.querySelector('.popup_type_img');
+const imgItem = popupImg.querySelector('.popup__image');
+const imgPopupCaption = popupImg.querySelector('.popup__caption');
 
 // Переменные полей Profile
 const profileInfo = profile.querySelector('.profile__info');
@@ -32,6 +34,12 @@ const popupCardForm = popupCard.querySelector('.popup__form');
 const popupCardName = popupCard.querySelector('.popup__input_type_name');
 const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
 
+
+//Работа по созданию экземпляров классов валидации попапов и включение валидации
+const popupProfileFormValidator = new FormValidator(validationSettings, popupProfileForm);
+const popupCardFormValidator = new FormValidator(validationSettings, popupCardForm);
+popupProfileFormValidator.enableValidation();
+popupCardFormValidator.enableValidation();
 
 // Работа с открытием, закрытием Popup
 
@@ -57,13 +65,16 @@ function closePopupWithClick(evt) {
 }
 
 function openPopup(modalWindowForm) {
-
-  const formValidator = new FormValidator(validationSettings, modalWindowForm);
-  formValidator.enableValidation();
-
   modalWindowForm.classList.add('popup__opened');
   page.addEventListener('keyup', closePopupWithEscape);//закрытие по нажатию Escape
   modalWindowForm.addEventListener('mousedown', closePopupWithClick);//закрытие с close button или overlay
+}
+
+function openPopupImage(name, link) {
+  imgItem.src = link;
+  imgItem.alt = `Изображение ${name}`;
+  imgPopupCaption.textContent = name;
+  openPopup(popupImg);
 }
 
 function closePopup(modalWindowForm) {
@@ -83,20 +94,16 @@ function setPopupProfilefields() {
 setPopupProfilefields()
 
 function handleEditProfile() {
+  popupProfileFormValidator.clearErrors();
   setPopupProfilefields()
   openPopup(popupProfile);
 }
 
 function submitPopupProfile(evt) {
   evt.preventDefault();
-  if (popupProfileName.value.trim()) {
-    profileName.textContent =  popupProfileName.value.trim();
-    profileAbout.textContent =  popupProfileAbout.value.trim();
-    closePopup(popupProfile);
-  }
-  else {
-    closePopup(popupProfile);
-  }
+  profileName.textContent =  popupProfileName.value.trim();
+  profileAbout.textContent =  popupProfileAbout.value.trim();
+  closePopup(popupProfile);
 }
 
 
@@ -104,7 +111,7 @@ function submitPopupProfile(evt) {
 function renderCards() {
 
   const cardsArr = initialCards.map((item) => {
-    const newCard = new Card(item, '.card-template');
+    const newCard = new Card(item, '.card-template', openPopupImage);
 
     return newCard.generateCard();
   });
@@ -117,6 +124,8 @@ renderCards();
 // Работа с формой Popup добавления карточки
 
 function handleAddCard() {
+  popupCardFormValidator.clearErrors();
+  popupCardFormValidator.setPopupCardSubmitToInitial();
   openPopup(popupCard);
   popupCardForm.reset();
 }
@@ -124,16 +133,9 @@ function handleAddCard() {
 function submitPopupCard(evt) {
 
   evt.preventDefault();
-  if (popupCardName.value.trim()) {
-    const newCard = new Card({name:popupCardName.value, link:popupCardAbout.value},'.card-template');
-    cardsList.prepend(newCard.generateCard());
-    closePopup(popupCard);
-    popupCardForm.reset();
-  }
-  else {
-    closePopup(popupCard);
-    popupCardForm.reset();
-  }
+  const newCard = new Card({name:popupCardName.value, link:popupCardAbout.value},'.card-template', openPopupImage);
+  cardsList.prepend(newCard.generateCard());
+  closePopup(popupCard);
 }
 
 
