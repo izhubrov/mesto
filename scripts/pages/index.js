@@ -1,8 +1,9 @@
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
+import Section from '../components/Section.js';
 
-import {initialCards, validationSettings, page, cardsList, profile, btnAdd, btnEdit,
-  popupProfile, popupCard, popupImg, imgItem, imgPopupCaption, profileInfo, profileName,
+import {initialCards, validationSettings, page, cardsList, btnAdd, btnEdit,
+  popupProfile, popupCard, popupImg, imgItem, imgPopupCaption, profileName,
   profileAbout, popupProfileForm, popupProfileName, popupProfileAbout, popupCardForm,
   popupCardName, popupCardAbout} from '../utils/constants.js';
 
@@ -89,13 +90,17 @@ function createCard(item, templateSelector) {
 
 
 //Отображаем изначальные карточки
-function renderCards() {
-  const cardsArr = initialCards.map(item => createCard(item, '.card-template'));
 
-  cardsList.prepend(...cardsArr);
-}
+  const cardsArr = new Section({
+    data: initialCards,
+    renderer: item => {
+      const generatedCard = createCard(item, '.card-template');
+      cardsArr.setItem(generatedCard);
+    }
+  },'.cards');
 
-renderCards();
+  cardsArr.renderItems();
+
 
 
 // Работа с формой Popup добавления карточки
