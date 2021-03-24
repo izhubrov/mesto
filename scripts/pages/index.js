@@ -1,39 +1,10 @@
-import FormValidator from './FormValidator.js';
-import {validationSettings} from './validationSettings.js';
-import Card from './Card.js';
-import {initialCards} from './initial-cards.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
 
-// Переменные элементов page
-const page = document.querySelector('.page');
-const cardsList = page.querySelector('.cards');
-const profile = page.querySelector('.profile');
-
-// Переменные кнопок
-const btnAdd = profile.querySelector('.profile__btn-add');
-const btnEdit = profile.querySelector('.profile__btn-edit');
-
-// Переменные Popup
-const popupProfile = page.querySelector('.popup_type_profile');
-const popupCard = page.querySelector('.popup_type_card');
-const popupImg = document.querySelector('.popup_type_img');
-const imgItem = popupImg.querySelector('.popup__image');
-const imgPopupCaption = popupImg.querySelector('.popup__caption');
-
-// Переменные полей Profile
-const profileInfo = profile.querySelector('.profile__info');
-const profileName = profileInfo.querySelector('.profile__name');
-const profileAbout = profileInfo.querySelector('.profile__about');
-
-// Переменные формы Popup редактирования профиля пользователя
-const popupProfileForm = popupProfile.querySelector('.popup__form');
-const popupProfileName = popupProfile.querySelector('.popup__input_type_name');
-const popupProfileAbout = popupProfile.querySelector('.popup__input_type_about');
-
-// Переменные формы Popup добавления карточки
-const popupCardForm = popupCard.querySelector('.popup__form');
-const popupCardName = popupCard.querySelector('.popup__input_type_name');
-const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
-
+import {initialCards, validationSettings, page, cardsList, profile, btnAdd, btnEdit,
+  popupProfile, popupCard, popupImg, imgItem, imgPopupCaption, profileInfo, profileName,
+  profileAbout, popupProfileForm, popupProfileName, popupProfileAbout, popupCardForm,
+  popupCardName, popupCardAbout} from '../utils/constants.js';
 
 //Работа по созданию экземпляров классов валидации попапов и включение валидации
 const popupProfileFormValidator = new FormValidator(validationSettings, popupProfileForm);
@@ -107,15 +78,21 @@ function submitPopupProfile(evt) {
 }
 
 
+
+//Заполняем карточки
+
+function createCard(item, templateSelector) {
+  const newCard = new Card(item, templateSelector, openPopupImage);
+
+  return newCard.generateCard();
+}
+
+
 //Отображаем изначальные карточки
 function renderCards() {
+  const cardsArr = initialCards.map(item => createCard(item, '.card-template'));
 
-  const cardsArr = initialCards.map((item) => {
-    const newCard = new Card(item, '.card-template', openPopupImage);
-
-    return newCard.generateCard();
-  });
-  cardsList.append(...cardsArr);
+  cardsList.prepend(...cardsArr);
 }
 
 renderCards();
@@ -131,10 +108,10 @@ function handleAddCard() {
 }
 
 function submitPopupCard(evt) {
-
   evt.preventDefault();
-  const newCard = new Card({name:popupCardName.value, link:popupCardAbout.value},'.card-template', openPopupImage);
-  cardsList.prepend(newCard.generateCard());
+  const generatedCard = createCard({name:popupCardName.value, link:popupCardAbout.value}, '.card-template');
+
+  cardsList.prepend(generatedCard);
   closePopup(popupCard);
 }
 

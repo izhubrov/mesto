@@ -47,7 +47,7 @@ export default class Card {
     this._elementsOfCard.cardImg.src = this._link;
     this._elementsOfCard.cardImg.alt = this._name;
     this._elementsOfCard.cardTitle.textContent = this._name;
-    
+
     this._setEventListeners();
 
     this._delay = 1/6;
