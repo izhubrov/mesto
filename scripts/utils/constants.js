@@ -36,7 +36,6 @@ const validationSettings = {
 };
 
 // Переменные элементов page
-const cardsList = document.querySelector('.cards');
 const profile = document.querySelector('.profile');
 
 // Переменные кнопок
@@ -46,25 +45,11 @@ const btnEdit = profile.querySelector('.profile__btn-edit');
 // Переменные Popup
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
-const popupImg = document.querySelector('.popup_type_img');
-const imgItem = popupImg.querySelector('.popup__image');
-const imgPopupCaption = popupImg.querySelector('.popup__caption');
-
-// Переменные полей Profile
-const profileInfo = profile.querySelector('.profile__info');
-const profileName = profileInfo.querySelector('.profile__name');
-const profileAbout = profileInfo.querySelector('.profile__about');
 
 // // Переменные формы Popup редактирования профиля пользователя
 const popupProfileForm = popupProfile.querySelector('.popup__form');
-// const popupProfileName = popupProfile.querySelector('.popup__input_type_name');
-// const popupProfileAbout = popupProfile.querySelector('.popup__input_type_about');
 
 // // Переменные формы Popup добавления карточки
 const popupCardForm = popupCard.querySelector('.popup__form');
-// const popupCardName = popupCard.querySelector('.popup__input_type_name');
-// const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
 
-export {initialCards, validationSettings, cardsList, profile, btnAdd, btnEdit,
-  popupImg, imgItem, imgPopupCaption, profileInfo, profileName,
-  profileAbout, popupProfileForm, popupCardForm}
+export {initialCards, validationSettings, btnAdd, btnEdit, popupProfileForm, popupCardForm}
