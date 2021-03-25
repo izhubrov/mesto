@@ -16,14 +16,14 @@ popupCardFormValidator.enableValidation();
 
 const popupImage = new PopupWithImage('.popup_type_img');
 
-//Заполняем карточки
+
+//Работа по созданию экземпляров Карточек (начальных) и их отрисовке на странице
 function createCard(item, templateSelector) {
   const newCard = new Card(item, templateSelector, popupImage.handleCardClick.bind(popupImage));
 
   return newCard.generateCard();
 }
 
-//Отображаем изначальные карточки
 const cardsList = new Section({
   data: initialCards,
   renderer: item => {
@@ -34,7 +34,8 @@ const cardsList = new Section({
 
 cardsList.renderItems();
 
-//Работа по созданию экземпляров классов
+
+//Работа по созданию экземпляров классов Info пользователя, Popup редактирования профиля и Popup заполнения карточки
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
   userAboutSelector: '.profile__about'
@@ -58,7 +59,7 @@ const popupCard = new PopupWithForm({
 })
 
 
-
+//Работа по обработке событий нажатия на кнопки редактирования профиля и добавления карточки
 function handleEditProfile() {
   popupProfileFormValidator.clearErrors();
   popupProfileFormValidator.setPopupSubmitToInitial();
@@ -74,7 +75,5 @@ function handleAddCard() {
   popupCard.openPopup();
 }
 
-
-  //Обработчики событий
 btnEdit.addEventListener('click', handleEditProfile);
 btnAdd.addEventListener('click', handleAddCard);
