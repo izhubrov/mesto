@@ -36,17 +36,16 @@ const validationSettings = {
 };
 
 // Переменные элементов page
-const page = document.querySelector('.page');
-const cardsList = page.querySelector('.cards');
-const profile = page.querySelector('.profile');
+const cardsList = document.querySelector('.cards');
+const profile = document.querySelector('.profile');
 
 // Переменные кнопок
 const btnAdd = profile.querySelector('.profile__btn-add');
 const btnEdit = profile.querySelector('.profile__btn-edit');
 
 // Переменные Popup
-const popupProfile = page.querySelector('.popup_type_profile');
-const popupCard = page.querySelector('.popup_type_card');
+const popupProfile = document.querySelector('.popup_type_profile');
+const popupCard = document.querySelector('.popup_type_card');
 const popupImg = document.querySelector('.popup_type_img');
 const imgItem = popupImg.querySelector('.popup__image');
 const imgPopupCaption = popupImg.querySelector('.popup__caption');
@@ -56,17 +55,16 @@ const profileInfo = profile.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
 const profileAbout = profileInfo.querySelector('.profile__about');
 
-// Переменные формы Popup редактирования профиля пользователя
+// // Переменные формы Popup редактирования профиля пользователя
 const popupProfileForm = popupProfile.querySelector('.popup__form');
-const popupProfileName = popupProfile.querySelector('.popup__input_type_name');
-const popupProfileAbout = popupProfile.querySelector('.popup__input_type_about');
+// const popupProfileName = popupProfile.querySelector('.popup__input_type_name');
+// const popupProfileAbout = popupProfile.querySelector('.popup__input_type_about');
 
-// Переменные формы Popup добавления карточки
+// // Переменные формы Popup добавления карточки
 const popupCardForm = popupCard.querySelector('.popup__form');
-const popupCardName = popupCard.querySelector('.popup__input_type_name');
-const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
+// const popupCardName = popupCard.querySelector('.popup__input_type_name');
+// const popupCardAbout = popupCard.querySelector('.popup__input_type_about');
 
-export {initialCards, validationSettings, page, cardsList, profile, btnAdd, btnEdit,
-  popupProfile, popupCard, popupImg, imgItem, imgPopupCaption, profileInfo, profileName,
-  profileAbout, popupProfileForm, popupProfileName, popupProfileAbout, popupCardForm,
-  popupCardName, popupCardAbout}
+export {initialCards, validationSettings, cardsList, profile, btnAdd, btnEdit,
+  popupImg, imgItem, imgPopupCaption, profileInfo, profileName,
+  profileAbout, popupProfileForm, popupCardForm}

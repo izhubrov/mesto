@@ -58,7 +58,7 @@ export default class FormValidator {
 
   };
 
-  setPopupCardSubmitToInitial() {
+  setPopupSubmitToInitial() {
     this._formElement.querySelector(this._validationSettings.submitButtonSelector).setAttribute('disabled',true);
     this._formElement.querySelector(this._validationSettings.submitButtonSelector).classList.add(this._validationSettings.inactiveButtonClass);
   }
@@ -85,7 +85,7 @@ export default class FormValidator {
   enableValidation() {
 
     const fieldSetList = Array.from(this._formElement.querySelectorAll(this._validationSettings.fieldSetSelector));
-    
+
     fieldSetList.forEach(() => this._setEventListeners());
   }
 }
