@@ -35,7 +35,6 @@ const validationSettings = {
   activeErrorClass: 'popup__input-error_active'
 };
 
-// Переменные элементов page
 const profile = document.querySelector('.profile');
 
 // Переменные кнопок
@@ -48,8 +47,11 @@ const popupCard = document.querySelector('.popup_type_card');
 
 // // Переменные формы Popup редактирования профиля пользователя
 const popupProfileForm = popupProfile.querySelector('.popup__form');
+const popupProfileInputName = popupProfileForm.querySelector('.popup__input_type_name');
+const popupProfileInputAbout = popupProfileForm.querySelector('.popup__input_type_about');
 
 // // Переменные формы Popup добавления карточки
 const popupCardForm = popupCard.querySelector('.popup__form');
 
-export {initialCards, validationSettings, btnAdd, btnEdit, popupProfileForm, popupCardForm}
+export {initialCards, validationSettings, btnAdd, btnEdit,popupProfileForm,
+  popupCardForm, popupProfileInputName,popupProfileInputAbout}

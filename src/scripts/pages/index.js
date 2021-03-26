@@ -6,8 +6,8 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 
-import {initialCards, validationSettings, btnAdd, btnEdit,
-  popupProfileForm, popupCardForm} from '../utils/constants.js';
+import {initialCards, validationSettings, btnAdd, btnEdit, popupProfileForm, popupCardForm,
+  popupProfileInputName as InputName, popupProfileInputAbout as InputAbout} from '../utils/constants.js';
 
 //Работа по созданию экземпляров классов валидации попапов и включение валидации
 const popupProfileFormValidator = new FormValidator(validationSettings, popupProfileForm);
@@ -45,10 +45,12 @@ const userInfo = new UserInfo({
 const popupProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (formValues) => {
-    userInfo.setUserInfo({name: formValues.name, about: formValues.about});
+    userInfo.setUserInfo(formValues);
     popupProfile.closePopup();
   }
 });
+
+
 
 const popupCard = new PopupWithForm({
   popupSelector: '.popup_type_card',
@@ -58,21 +60,21 @@ const popupCard = new PopupWithForm({
     popupCard.closePopup();
   }
 })
-
+popupCard.setEventListeners();
 
 //Работа по обработке событий нажатия на кнопки редактирования профиля и добавления карточки
 function handleEditProfile() {
   popupProfileFormValidator.clearErrors();
   popupProfileFormValidator.setPopupSubmitToInitial();
-  popupProfile.setInputValues(userInfo.getUserInfo());
   popupProfile.setEventListeners();
+  InputName.value = userInfo.getUserInfo().userName;
+  InputAbout.value = userInfo.getUserInfo().userAbout;
   popupProfile.openPopup();
 }
 
 function handleAddCard() {
   popupCardFormValidator.clearErrors();
   popupCardFormValidator.setPopupSubmitToInitial();
-  popupCard.setEventListeners();
   popupCard.openPopup();
 }
 
