@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Иван Жубров">
   <meta name="description" content="Страница про живописные места в России">
-  <link rel="stylesheet" href="./pages/index.css">
-  <link rel="icon" href="./images/logo-icon.svg">
+  <link rel="icon" href="<%=require('./images/logo-icon.svg')%>">
   <title>Mesto</title>
 </head>
 <body class="page">
   <header class="header page__container">
-    <img class="header__logo" src="./images/logo.svg" alt="Логотип сайта с надписью Место Россия английскими буквами">
+    <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип сайта с надписью Место Россия английскими буквами">
   </header>
   <main>
     <section class="profile page__container">
-      <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар пользователя">
+      <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя">
+
       <div class="profile__info">
         <div class="profile__container">
           <h1 class="profile__name text-cut">Жак-Ив Кусто</h1>
@@ -101,6 +101,5 @@
 </li>
 </template>
 
-<script type="module" src="./scripts/pages/index.js"></script>
 </body>
 </html>
