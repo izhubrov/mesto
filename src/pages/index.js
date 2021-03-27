@@ -1,13 +1,13 @@
-import '../pages/index.css';
-import FormValidator from '../components/FormValidator.js';
-import Card from '../components/Card.js';
-import Section from '../components/Section.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import UserInfo from '../components/UserInfo.js';
+import './index.css';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Card from '../scripts/components/Card.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
 import {initialCards, validationSettings, btnAdd, btnEdit, popupProfileForm, popupCardForm,
-  popupProfileInputName as InputName, popupProfileInputAbout as InputAbout} from '../utils/constants.js';
+  popupProfileInputName as InputName, popupProfileInputAbout as InputAbout} from '../scripts/utils/constants.js';
 
 //Работа по созданию экземпляров классов валидации попапов и включение валидации
 const popupProfileFormValidator = new FormValidator(validationSettings, popupProfileForm);
@@ -50,8 +50,6 @@ const popupProfile = new PopupWithForm({
   }
 });
 
-
-
 const popupCard = new PopupWithForm({
   popupSelector: '.popup_type_card',
   handleFormSubmit: (formValues) => {
@@ -60,21 +58,27 @@ const popupCard = new PopupWithForm({
     popupCard.closePopup();
   }
 })
-popupCard.setEventListeners();
+
 
 //Работа по обработке событий нажатия на кнопки редактирования профиля и добавления карточки
+
+function setPopupProfileInputs() {
+  InputName.value = userInfo.getUserInfo().userName;
+  InputAbout.value = userInfo.getUserInfo().userAbout;
+}
+
 function handleEditProfile() {
   popupProfileFormValidator.clearErrors();
   popupProfileFormValidator.setPopupSubmitToInitial();
+  setPopupProfileInputs();
   popupProfile.setEventListeners();
-  InputName.value = userInfo.getUserInfo().userName;
-  InputAbout.value = userInfo.getUserInfo().userAbout;
   popupProfile.openPopup();
 }
 
 function handleAddCard() {
   popupCardFormValidator.clearErrors();
   popupCardFormValidator.setPopupSubmitToInitial();
+  popupCard.setEventListeners();
   popupCard.openPopup();
 }
 

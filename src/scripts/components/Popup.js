@@ -1,6 +1,10 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
+    this._closePopup = {
+      esc: this._closePopupWithEscape.bind(this),
+      click: this._closePopupWithClick.bind(this)
+    }
   }
 
   openPopup() {
@@ -26,13 +30,13 @@ export default class Popup {
   }
 
   _removeEventListeners() {
-    document.removeEventListener('keyup', this._closePopupWithEscape.bind(this));
-    this._popupElement.removeEventListener('mousedown', this._closePopupWithClick.bind(this));
+    document.removeEventListener('keyup', this._closePopup.esc);
+    this._popupElement.removeEventListener('mousedown', this._closePopup.click);
   }
 
   setEventListeners() {
-    document.addEventListener('keyup', this._closePopupWithEscape.bind(this));//закрытие по нажатию Escape
-    this._popupElement.addEventListener('mousedown', this._closePopupWithClick.bind(this));//закрытие с close button или overlay
+    document.addEventListener('keyup',  this._closePopup.esc);//закрытие по нажатию Escape
+    this._popupElement.addEventListener('mousedown', this._closePopup.click);//закрытие с close button или overlay
   }
 
 
