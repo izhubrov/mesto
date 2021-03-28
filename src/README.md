@@ -1,8 +1,8 @@
 # Проект: Место
 Данный проект представляет собой одностраничный сайт.
 
-Страница сайта расположена по адресу: https://izhubrov.github.io/mesto/.
-Собранный через Webpack проект расположен по адресу: https://github.com/izhubrov/mesto.
+* Страница сайта расположена по адресу: https://izhubrov.github.io/mesto/.
+* Собранный через Webpack проект расположен по адресу: https://github.com/izhubrov/mesto.
 ___
 ## Макет сайта
 
