@@ -9,7 +9,6 @@ export default class PopupWithImage extends Popup{
 
   handleCardClick(name, link) {
     super.openPopup();
-    this.setEventListeners();
     this._imageItem.src = link;
     this._imageItem.alt = `Изображение ${name}`;
     this._imageItemCaption.textContent = name;
