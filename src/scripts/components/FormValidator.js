@@ -58,28 +58,11 @@ export default class FormValidator {
 
   };
 
-  setPopupSubmitToInitial() {
-    this._formElement.querySelector(this._validationSettings.submitButtonSelector).setAttribute('disabled',true);
-    this._formElement.querySelector(this._validationSettings.submitButtonSelector).classList.add(this._validationSettings.inactiveButtonClass);
-  }
+  setPopupToInitialState() {
+    this._inputList.forEach(inputErrorElement => this._hideInputError(inputErrorElement));
 
-  // Функция очистки ошибок в Popup
-  clearErrors() {
-    const errorList = Array.from(this._formElement.querySelectorAll(`.${this._validationSettings.activeErrorClass}`));
-    const inputErrorList = Array.from(this._formElement.querySelectorAll(`.${this._validationSettings.inputErrorClass}`));
-
-    if (errorList !== []) {
-      errorList.forEach((errorElement) => {
-      errorElement.textContent='';
-      errorElement.classList.remove(this._validationSettings.activeErrorClass);
-      })
-    }
-
-    if (inputErrorList !== []) {
-      inputErrorList.forEach((inputErrorElement) => {
-        inputErrorElement.classList.remove(this._validationSettings.inputErrorClass);
-      })
-    }
+    this._buttonElement.setAttribute('disabled',true);
+    this._buttonElement.classList.add(this._validationSettings.inactiveButtonClass);
   }
 
   enableValidation() {

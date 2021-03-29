@@ -7,7 +7,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 
 import {initialCards, validationSettings, btnAdd, btnEdit, popupProfileForm, popupCardForm,
-  popupProfileInputName as InputName, popupProfileInputAbout as InputAbout} from '../scripts/utils/constants.js';
+  popupProfileInputName as inputName, popupProfileInputAbout as inputAbout} from '../scripts/utils/constants.js';
 
 //Работа по созданию экземпляров классов валидации попапов и включение валидации
 const popupProfileFormValidator = new FormValidator(validationSettings, popupProfileForm);
@@ -57,28 +57,28 @@ const popupCard = new PopupWithForm({
     cardsList.setItem(generatedCard);
     popupCard.closePopup();
   }
-})
+});
+
+popupImage.setEventListeners();
+popupProfile.setEventListeners();
+popupCard.setEventListeners();
 
 
 //Работа по обработке событий нажатия на кнопки редактирования профиля и добавления карточки
 
 function setPopupProfileInputs() {
-  InputName.value = userInfo.getUserInfo().userName;
-  InputAbout.value = userInfo.getUserInfo().userAbout;
+  inputName.value = userInfo.getUserInfo().userName;
+  inputAbout.value = userInfo.getUserInfo().userAbout;
 }
 
 function handleEditProfile() {
-  popupProfileFormValidator.clearErrors();
-  popupProfileFormValidator.setPopupSubmitToInitial();
+  popupProfileFormValidator.setPopupToInitialState();
   setPopupProfileInputs();
-  popupProfile.setEventListeners();
   popupProfile.openPopup();
 }
 
 function handleAddCard() {
-  popupCardFormValidator.clearErrors();
-  popupCardFormValidator.setPopupSubmitToInitial();
-  popupCard.setEventListeners();
+  popupCardFormValidator.setPopupToInitialState();
   popupCard.openPopup();
 }
 
