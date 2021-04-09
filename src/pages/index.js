@@ -5,15 +5,19 @@ import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js';
 
-import {initialCards, validationSettings, btnAdd, btnEdit, popupProfileForm, popupCardForm,
+import {apiSettings, validationSettings, btnAdd, btnEdit, popupProfileForm, popupCardForm,
   popupProfileInputName as inputName, popupProfileInputAbout as inputAbout} from '../scripts/utils/constants.js';
+
 
 //Работа по созданию экземпляров классов валидации попапов и включение валидации
 const popupProfileFormValidator = new FormValidator(validationSettings, popupProfileForm);
 const popupCardFormValidator = new FormValidator(validationSettings, popupCardForm);
 popupProfileFormValidator.enableValidation();
 popupCardFormValidator.enableValidation();
+
+
 
 const popupImage = new PopupWithImage('.popup_type_img');
 
@@ -25,27 +29,19 @@ function createCard(item, templateSelector) {
   return newCard.generateCard();
 }
 
-const cardsList = new Section({
-  data: initialCards,
-  renderer: item => {
-    const generatedCard = createCard(item, '.card-template');
-    cardsList.setItem(generatedCard, true);
-  }
-},'.cards');
-
-cardsList.renderItems();
-
-
 //Работа по созданию экземпляров классов Info пользователя, Popup редактирования профиля и Popup заполнения карточки
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
-  userAboutSelector: '.profile__about'
+  userAboutSelector: '.profile__about',
+  userAvatarSelector: '.profile__avatar'
 });
 
 const popupProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (formValues) => {
-    userInfo.setUserInfo(formValues);
+    api.patchUserInfo(formValues)
+      .then((updatedUser) => userInfo.setUserInfo(updatedUser))
+      .catch((err) => console.log(err));
     popupProfile.closePopup();
   }
 });
@@ -53,16 +49,42 @@ const popupProfile = new PopupWithForm({
 const popupCard = new PopupWithForm({
   popupSelector: '.popup_type_card',
   handleFormSubmit: (formValues) => {
-    const generatedCard = createCard({name:formValues.title, link:formValues.link}, '.card-template');
-    cardsList.setItem(generatedCard);
+    api.postCard({name:formValues.title, link:formValues.link})
+    .then((newCard)=> {
+      const generatedCard = createCard(newCard, '.card-template');
+      cardsList.setItem(generatedCard);
+    })
+    .catch((err) => console.log(err));
     popupCard.closePopup();
   }
 });
 
+const cardsList = new Section({
+  renderer: item => {
+    const generatedCard = createCard(item, '.card-template');
+    cardsList.setItem(generatedCard, true);
+  }
+},'.cards');
+
+//Работа c API
+const api = new Api(apiSettings);
+
+api.getUser()
+  .then((UserInfoObject) => {
+    userInfo.setUserInfo(UserInfoObject);
+    userInfo.setUserAvatar(UserInfoObject);
+  })
+  .catch((err) => console.log(err));
+
+api.getCards()
+  .then((cardsArr) => cardsList.renderItems(cardsArr))
+  .catch((err) => console.log(err));
+
+
+
 popupImage.setEventListeners();
 popupProfile.setEventListeners();
 popupCard.setEventListeners();
-
 
 //Работа по обработке событий нажатия на кнопки редактирования профиля и добавления карточки
 

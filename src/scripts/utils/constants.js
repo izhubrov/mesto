@@ -1,29 +1,7 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const apiSettings = {
+  groupId: 'cohort-22',
+  token: 'a835ebe3-157b-4140-922b-a5f49168fcac'
+}
 
 const validationSettings = {
   inputSelector: '.popup__input',
@@ -53,5 +31,5 @@ const popupProfileInputAbout = popupProfileForm.querySelector('.popup__input_typ
 // // Переменные формы Popup добавления карточки
 const popupCardForm = popupCard.querySelector('.popup__form');
 
-export {initialCards, validationSettings, btnAdd, btnEdit,popupProfileForm,
+export {apiSettings, validationSettings, btnAdd, btnEdit,popupProfileForm,
   popupCardForm, popupProfileInputName,popupProfileInputAbout}
