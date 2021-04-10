@@ -31,5 +31,7 @@ const popupProfileInputAbout = popupProfileForm.querySelector('.popup__input_typ
 // // Переменные формы Popup добавления карточки
 const popupCardForm = popupCard.querySelector('.popup__form');
 
+
+
 export {apiSettings, validationSettings, btnAdd, btnEdit,popupProfileForm,
   popupCardForm, popupProfileInputName,popupProfileInputAbout}

@@ -89,13 +89,28 @@
   </div>
 </div>
 
+<div class="popup popup_type_remove">
+  <div class="popup__container popup__container_form">
+    <h2 class="popup__title">Вы уверены?</h2>
+    <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
+    <form class="popup__form" name="popup-form" novalidate>
+
+      <button type="submit" class="popup__btn-submit">Да</button>
+
+    </form>
+  </div>
+</div>
+
 <template class="card-template">
 <li class="cards__item">
   <img class="cards__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
   <button type="button" aria-label="Удалить" class="cards__btn-remove"></button>
   <div class="cards__description">
     <h2 class="cards__title text-cut"></h2>
-    <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
+    <div class="cards__likes-container">
+      <button type="button" aria-label="Нравится" class="cards__btn-like"></button>
+      <div class="cards__likes-counter"></div>
+    </div>
   </div>
 </li>
 </template>

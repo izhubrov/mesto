@@ -76,4 +76,68 @@ export default class Api {
       })
   }
 
+  deleteCard(card) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupId}/cards/${card._id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+      }
+    })
+      .then ((res)=> {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject(`Ошибка ${res.status}`);
+        }
+      })
+  }
+
+  likeCard(card) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupId}/cards/likes/${card._id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token,
+      }
+    })
+      .then ((res)=> {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject(`Ошибка ${res.status}`);
+        }
+      })
+  }
+
+  dislikeCard(card) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupId}/cards/likes/${card._id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+      }
+    })
+      .then ((res)=> {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject(`Ошибка ${res.status}`);
+        }
+      })
+  }
+
+  getCountsOfLikes(card) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupId}/cards/likes/${card._id}`, {
+      headers: {
+        authorization: this._token
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject(`Ошибка ${res.status}`);
+        }
+      })
+  }
+
+
 }

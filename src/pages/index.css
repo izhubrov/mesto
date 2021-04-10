@@ -41,10 +41,13 @@
 @import url(../blocks/cards/__item/cards__item.css);
 @import url(../blocks/cards/__image/cards__image.css);
 @import url(../blocks/cards/__btn-remove/cards__btn-remove.css);
+@import url(../blocks/cards/__btn-remove/_active/cards__btn-remove_active.css);
 @import url(../blocks/cards/__description/cards__description.css);
 @import url(../blocks/cards/__title/cards__title.css);
+@import url(../blocks/cards/__likes-container/__likes-container.css);
 @import url(../blocks/cards/__btn-like/cards__btn-like.css);
 @import url(../blocks/cards/__btn-like/_active/cards__btn-like_active.css);
+@import url(../blocks/cards/__likes-counter/cards__likes-counter.css);
 
 
 @import url(../blocks/footer/footer.css);
