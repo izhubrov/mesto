@@ -14,13 +14,13 @@
   </header>
   <main>
     <section class="profile page__container">
-      <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя">
+      <img class="profile__avatar" src="" alt="Аватар пользователя">
       <div class="profile__info">
         <div class="profile__container">
-          <h1 class="profile__name text-cut">Жак-Ив Кусто</h1>
+          <h1 class="profile__name text-cut"></h1>
           <button type="button" aria-label="Редактировать" class="profile__btn-edit"></button>
         </div>
-       <p class="profile__about text-cut">Исследователь океана</p>
+       <p class="profile__about text-cut"></p>
       </div>
       <button type="button" aria-label="Добавить" class="profile__btn-add"></button>
     </section>
@@ -38,7 +38,7 @@
   <div class="popup__container popup__container_form">
     <h2 class="popup__title">Редактировать профиль</h2>
     <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
-    <form class="popup__form" name="popup-form" novalidate>
+    <form class="popup__form" name="form-edit-profile" novalidate>
       <fieldset class="popup__set">
       <label class="popup__field">
         <input type="text" name="name" placeholder="Имя" class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
@@ -60,7 +60,7 @@
   <div class="popup__container popup__container_form">
     <h2 class="popup__title">Новое место</h2>
     <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
-    <form class="popup__form" name="popup-form" novalidate>
+    <form class="popup__form" name="form-add-card" novalidate>
 
       <fieldset class = "popup__set">
         <label class="popup__field">
@@ -89,6 +89,25 @@
   </div>
 </div>
 
+<div class="popup popup_type_avatar">
+  <div class="popup__container popup__container_form">
+    <h2 class="popup__title">Обновить аватар</h2>
+    <button type="button" aria-label="Закрыть" class="popup__btn-close"></button>
+    <form class="popup__form" name="form-edit-avatar" novalidate>
+
+      <fieldset class = "popup__set">
+        <label class="popup__field">
+          <input type="url" name="link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" required>
+          <span class="popup__input-error popup__input-error_type_link"></span>
+        </label>
+      </fieldset>
+
+      <button type="submit" class="popup__btn-submit">Сохранить</button>
+
+    </form>
+  </div>
+</div>
+
 <div class="popup popup_type_remove">
   <div class="popup__container popup__container_form">
     <h2 class="popup__title">Вы уверены?</h2>
@@ -103,7 +122,7 @@
 
 <template class="card-template">
 <li class="cards__item">
-  <img class="cards__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
+  <img class="cards__image" src="" alt="">
   <button type="button" aria-label="Удалить" class="cards__btn-remove"></button>
   <div class="cards__description">
     <h2 class="cards__title text-cut"></h2>

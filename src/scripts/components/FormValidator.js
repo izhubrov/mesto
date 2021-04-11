@@ -1,10 +1,11 @@
 export default class FormValidator {
 
-  constructor(validationSettings,formElement) {
+  constructor(validationSettings, formElement) {
     this._validationSettings = validationSettings;
     this._formElement = formElement;
     this._buttonElement = this._formElement.querySelector(this._validationSettings.submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._validationSettings.inputSelector));
+    this._submitText = this._formElement.getAttribute('name');
   }
 
   _showInputError (inputElement, errorMessage) {
@@ -58,9 +59,19 @@ export default class FormValidator {
 
   };
 
+  _setPopupSubmitTextToInitialState() {
+    this._buttonElement.textContent = this._validationSettings.initialSubmitButtonsTexts[`${this._submitText}`];
+  }
+
+  changeStatusOfSubmitButton() {
+    this._buttonElement.textContent = this._validationSettings.changedSubmitButtonsTexts[`${this._submitText}`];
+  }
+
   setPopupToInitialState() {
     this._inputList.forEach(inputErrorElement => this._hideInputError(inputErrorElement));
-
+    
+    this._setPopupSubmitTextToInitialState();
+    
     this._buttonElement.setAttribute('disabled',true);
     this._buttonElement.classList.add(this._validationSettings.inactiveButtonClass);
   }

@@ -66,7 +66,7 @@ export default class Card {
     this._element = null;
   }
 
-  _isCardAlreadyLike() {
+  _isCardAlreadyLiked() {
     if (this._arrUsersWhoLikes.some(user => user._id === this._mineId)) {
       this._elementsOfCard.btnLike.classList.add('cards__btn-like_active');
     }
@@ -81,7 +81,7 @@ export default class Card {
     this._elementsOfCard.cardTitle.textContent = this._name;
     this._elementsOfCard.likesCounter.textContent = this._arrUsersWhoLikes.length;
 
-    this._isCardAlreadyLike();
+    this._isCardAlreadyLiked();
     this._setBtnRemoveVisible();
     this._setEventListeners();
 

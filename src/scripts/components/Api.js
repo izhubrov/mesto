@@ -139,5 +139,23 @@ export default class Api {
       })
   }
 
-
+  changeAvatar(link) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupId}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          avatar: link
+        })
+      })
+      .then ((res)=> {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject(`Ошибка ${res.status}`);
+        }
+      })
+  }
 }

@@ -10,28 +10,40 @@ const validationSettings = {
   submitButtonSelector: '.popup__btn-submit',
   inactiveButtonClass: 'popup__btn-submit_inactive',
   inputErrorClass: 'popup__input_type_error',
-  activeErrorClass: 'popup__input-error_active'
-};
+  activeErrorClass: 'popup__input-error_active',
+  initialSubmitButtonsTexts: {
+    'form-edit-avatar': 'Сохранить',
+    'form-add-card': 'Добавить',
+    'form-edit-profile': 'Сохранить'
+  },
+  changedSubmitButtonsTexts: {
+    'form-edit-avatar': 'Сохранение...',
+    'form-add-card': 'Добавление...',
+    'form-edit-profile': 'Сохранение...'
+  }
+}
+
 
 const profile = document.querySelector('.profile');
 
 // Переменные кнопок
 const btnAdd = profile.querySelector('.profile__btn-add');
 const btnEdit = profile.querySelector('.profile__btn-edit');
+const avatarEdit = profile.querySelector('.profile__avatar');
 
 // Переменные Popup
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
+const popupAvatar = document.querySelector('.popup_type_avatar');
 
-// // Переменные формы Popup редактирования профиля пользователя
+// // Переменные форм Popup
 const popupProfileForm = popupProfile.querySelector('.popup__form');
 const popupProfileInputName = popupProfileForm.querySelector('.popup__input_type_name');
 const popupProfileInputAbout = popupProfileForm.querySelector('.popup__input_type_about');
-
-// // Переменные формы Popup добавления карточки
 const popupCardForm = popupCard.querySelector('.popup__form');
+const popupAvatarForm = popupAvatar.querySelector('.popup__form');
 
 
 
-export {apiSettings, validationSettings, btnAdd, btnEdit,popupProfileForm,
-  popupCardForm, popupProfileInputName,popupProfileInputAbout}
+export {apiSettings, validationSettings, btnAdd, btnEdit, avatarEdit, popupProfileForm,
+  popupCardForm, popupAvatarForm, popupProfileInputName, popupProfileInputAbout}
