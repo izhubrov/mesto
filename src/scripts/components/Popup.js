@@ -8,7 +8,8 @@ export default class Popup {
   }
 
   openPopup() {
-    this._popupElement.classList.add('popup__opened');
+    this._popupElement.classList.add('popup__flexed');
+    setTimeout(()=> this._popupElement.classList.add('popup__opened'),0);
     document.addEventListener('keyup',  this._closePopup.esc);//закрытие по нажатию Escape
   }
 
