@@ -76,16 +76,20 @@ function createCard(item, templateSelector) {
   return newCard.generateCard();
 }
 
-const cardsList = new Section({
-  renderer: item => {
-    const generatedCard = createCard(item, '.card-template');
-    cardsList.setItem(generatedCard, true);
-  }
-},'.cards');
+function getCardsFromApiAndRender() {
+  const cardsList = new Section({
+    renderer: item => {
+      const generatedCard = createCard(item, '.card-template');
+      cardsList.setItem(generatedCard, true);
+    }
+  },'.cards');
+  
+  api.getCards()
+  .then((cardsArr) => cardsList.renderItems(cardsArr))
+  .catch((err) => alert(err));
+}
 
-api.getCards()
-.then((cardsArr) => cardsList.renderItems(cardsArr))
-.catch((err) => alert(err));
+getCardsFromApiAndRender();
 
 
 //Работа с экземплярами классов Popup редактирования профиля//
