@@ -8,7 +8,7 @@ import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
 import {apiSettings, validationSettings, btnAdd, btnEdit, avatarEdit,
-  popupProfileForm, popupCardForm, popupAvatarForm, 
+  popupProfileForm, popupCardForm, popupAvatarForm,
   popupProfileInputName as inputName, popupProfileInputAbout as inputAbout}
   from '../scripts/utils/constants.js';
 
@@ -76,20 +76,16 @@ function createCard(item, templateSelector) {
   return newCard.generateCard();
 }
 
-function getCardsFromApiAndRender() {
-  const cardsList = new Section({
-    renderer: item => {
-      const generatedCard = createCard(item, '.card-template');
-      cardsList.setItem(generatedCard, true);
-    }
-  },'.cards');
-  
-  api.getCards()
-  .then((cardsArr) => cardsList.renderItems(cardsArr))
-  .catch((err) => alert(err));
-}
+const cardsList = new Section({
+  renderer: item => {
+    const generatedCard = createCard(item, '.card-template');
+    cardsList.setItem(generatedCard, true);
+  }
+},'.cards');
 
-getCardsFromApiAndRender();
+api.getCards()
+.then((cardsArr) => cardsList.renderItems(cardsArr))
+.catch((err) => alert(err));
 
 
 //Работа с экземплярами классов Popup редактирования профиля//
