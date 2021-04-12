@@ -8,6 +8,8 @@ export default class Popup {
   }
 
   openPopup() {
+    //Такая конструкция отображения именно в функции openPopup исключает мигание попапов при перезагрузке страницы или сбросе кеша
+    //Если включить popup__flexed класс в index.html сразу, тогда они мигают.
     this._popupElement.classList.add('popup__flexed');
     setTimeout(()=> this._popupElement.classList.add('popup__opened'),0);
     document.addEventListener('keyup',  this._closePopup.esc);//закрытие по нажатию Escape

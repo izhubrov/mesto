@@ -7,7 +7,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
-import {apiSettings, validationSettings, btnAdd, btnEdit, avatarEdit,
+import {apiSettings, validationSettings, submitButtonsTexts, btnAdd, btnEdit, avatarEdit,
   popupProfileForm, popupCardForm, popupAvatarForm,
   popupProfileInputName as inputName, popupProfileInputAbout as inputAbout}
   from '../scripts/utils/constants.js';
@@ -38,39 +38,32 @@ const userInfo = new UserInfo({
 });
 
 
-api.getUser()
-  .then((UserInfoObject) => {
-    userInfo.setUserInfo(UserInfoObject);
-    userInfo.setUserAvatar(UserInfoObject);
-  })
-  .catch((err) => alert(err));
-
-
 //Работа с экземплярами Карточек (начальных) и их отрисовке на странице
 function createCard(item, templateSelector) {
   const newCard = new Card(
     item,
     templateSelector,
-    popupImage.handleCardClick.bind(popupImage),
+    popupImage.openPopup.bind(popupImage),
 
-    {handleRemoveClick: () => {
-      popupRemove.openPopup();
-      cardToRemove = newCard;
-    }},
+    {
+      handleRemoveClick: () => {
+        popupRemove.openPopup();
+        cardToRemove = newCard;
+      },
+      handleCardLike: () => {
+        api.likeCard(newCard)
+          .then((res) => newCard.setCounterOfLikes(res.likes.length))
+          .catch((err) => alert(err))
+      },
+      handleCardDislike: () => {
+        api.dislikeCard(newCard)
+          .then((res) => newCard.setCounterOfLikes(res.likes.length))
+          .catch((err) => alert(err))
+      }
+    },
 
     {id: userInfo.id},
 
-    {handleCardLike: () => {
-      api.likeCard(newCard)
-        .then((res) => newCard.setCounterOfLikes(res.likes.length))
-        .catch((err) => alert(err))
-    }},
-
-    {handleCardDislike: () => {
-      api.dislikeCard(newCard)
-        .then((res) => newCard.setCounterOfLikes(res.likes.length))
-        .catch((err) => alert(err))
-    }}
     );
 
   return newCard.generateCard();
@@ -83,10 +76,16 @@ const cardsList = new Section({
   }
 },'.cards');
 
-api.getCards()
-.then((cardsArr) => cardsList.renderItems(cardsArr))
-.catch((err) => alert(err));
+//Работа с АPI получения данных пользователя и карточек с сервера
+const promiseGetUser = api.getUser()
+const promiseGetCards = api.getCards()
 
+Promise.all([promiseGetUser, promiseGetCards])
+.then((arrayOfObjectsUserAndCards) => {
+  userInfo.setUserInfo(arrayOfObjectsUserAndCards[0]);
+  cardsList.renderItems(arrayOfObjectsUserAndCards[1]);
+})
+.catch((err) => alert(err));
 
 //Работа с экземплярами классов Popup редактирования профиля//
 //Popup заполнения карточки, Popup удаления карточки, Popup редактирования Аватара пользователя
@@ -114,25 +113,23 @@ function addCardApi(formValues) {
 
 const popupCard = new PopupWithForm({
   popupSelector: '.popup_type_card',
+  submitButtonsTexts,
   handleFormSubmit: (formValues) => {
     checkImage(formValues.link)
     .then(()=> {
-      popupCardFormValidator.changeStatusOfSubmitButton();
+      popupCard.changeStatusOfSubmitButton();
       addCardApi(formValues);
     })
     .catch(() => alert('Изображение не найдено. Введите корректный адрес!'));
-  }
+  },
 });
 
 
 //Работа с API смены Аватара пользователя и создание попапа смены аватара пользователя
 function changeAvatarApi(formValues) {
   api.changeAvatar(formValues.link)
-  .then(() => {
-    api.getUser()
-      .then((UserInfoObject) => {
-        userInfo.setUserAvatar(UserInfoObject);
-      });
+  .then((UserInfoObject) => {
+    userInfo.setUserInfo(UserInfoObject);
     popupAvatar.closePopup();
   })
   .catch((err) => alert(err));
@@ -140,37 +137,44 @@ function changeAvatarApi(formValues) {
 
 const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
+  submitButtonsTexts,
   handleFormSubmit: (formValues) => {
     checkImage(formValues.link)
     .then(()=> {
-      popupAvatarFormValidator.changeStatusOfSubmitButton();
+      popupAvatar.changeStatusOfSubmitButton();
       changeAvatarApi(formValues);
     })
     .catch(() => alert('Изображение не найдено. Введите корректный адрес!'));
-  }
+  },
+
 })
 
 
 const popupProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
+  submitButtonsTexts,
   handleFormSubmit: (formValues) => {
-    popupProfileFormValidator.changeStatusOfSubmitButton();
+    popupProfile.changeStatusOfSubmitButton();
     api.patchUserInfo(formValues)
       .then((updatedUser) => {
         userInfo.setUserInfo(updatedUser);
         popupProfile.closePopup();
       })
       .catch((err) => alert(err));
-  }
+  },
 });
 
 const popupRemove = new PopupWithForm({
   popupSelector: '.popup_type_remove',
+  submitButtonsTexts,
   handleFormSubmit: () => {
+    popupRemove.changeStatusOfSubmitButton();
     api.deleteCard(cardToRemove)
-      .then(() => cardToRemove.removeCard())
+      .then(() => {
+        cardToRemove.removeCard();
+        popupRemove.closePopup();
+      })
       .catch((err) => alert(err));
-    popupRemove.closePopup();
   }
 });
 

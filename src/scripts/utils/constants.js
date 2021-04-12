@@ -1,25 +1,30 @@
 const apiSettings = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1',
   groupId: 'cohort-22',
   token: 'a835ebe3-157b-4140-922b-a5f49168fcac'
 }
 
 const validationSettings = {
   inputSelector: '.popup__input',
-  fieldSetSelector: '.popup__set',
   errorSelector: '.popup__input-error',
   submitButtonSelector: '.popup__btn-submit',
   inactiveButtonClass: 'popup__btn-submit_inactive',
   inputErrorClass: 'popup__input_type_error',
-  activeErrorClass: 'popup__input-error_active',
-  initialSubmitButtonsTexts: {
+  activeErrorClass: 'popup__input-error_active'
+}
+
+const submitButtonsTexts = {
+  initial: {
     'form-edit-avatar': 'Сохранить',
     'form-add-card': 'Добавить',
-    'form-edit-profile': 'Сохранить'
+    'form-edit-profile': 'Сохранить',
+    'form-edit-remove': 'Да',
   },
-  changedSubmitButtonsTexts: {
+  changed: {
     'form-edit-avatar': 'Сохранение...',
     'form-add-card': 'Добавление...',
-    'form-edit-profile': 'Сохранение...'
+    'form-edit-profile': 'Сохранение...',
+    'form-edit-remove': 'Удаление...',
   }
 }
 
@@ -45,5 +50,5 @@ const popupAvatarForm = popupAvatar.querySelector('.popup__form');
 
 
 
-export {apiSettings, validationSettings, btnAdd, btnEdit, avatarEdit, popupProfileForm,
+export {apiSettings, validationSettings, submitButtonsTexts, btnAdd, btnEdit, avatarEdit, popupProfileForm,
   popupCardForm, popupAvatarForm, popupProfileInputName, popupProfileInputAbout}

@@ -1,8 +1,7 @@
 export default class Card {
 
   constructor({name, link, likes, owner, _id},
-    templateSelector, handleCardClick, {handleRemoveClick}, {id},
-    {handleCardLike}, {handleCardDislike}) {
+    templateSelector, handleCardClick, {handleRemoveClick, handleCardLike, handleCardDislike}, {id}) {
       this._name = name;
       this._link = link;
       this._arrUsersWhoLikes = likes;
