@@ -1,7 +1,7 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
-    this._closePopup = {
+    this._closePopupObject = {
       esc: this._closePopupWithEscape.bind(this),
       click: this._closePopupWithClick.bind(this)
     }
@@ -12,12 +12,12 @@ export default class Popup {
     //Если включить popup__flexed класс в index.html сразу, тогда они мигают.
     this._popupElement.classList.add('popup__flexed');
     setTimeout(()=> this._popupElement.classList.add('popup__opened'),0);
-    document.addEventListener('keyup',  this._closePopup.esc);//закрытие по нажатию Escape
+    document.addEventListener('keyup',  this._closePopupObject.esc);//закрытие по нажатию Escape
   }
 
   closePopup() {
     this._popupElement.classList.remove('popup__opened');
-    document.removeEventListener('keyup', this._closePopup.esc);
+    document.removeEventListener('keyup', this._closePopupObject.esc);
   }
 
   _closePopupWithEscape(evt) {
@@ -35,7 +35,7 @@ export default class Popup {
 
 
   setEventListeners() {
-    this._popupElement.addEventListener('mousedown', this._closePopup.click);//закрытие с close button или overlay
+    this._popupElement.addEventListener('mousedown', this._closePopupObject.click);//закрытие с close button или overlay
   }
 
 

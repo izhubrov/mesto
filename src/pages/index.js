@@ -4,7 +4,7 @@ import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
-import ErrorPopup from '../scripts/components/ErrorPopup.js'
+import PopupWithError from '../scripts/components/PopupWithError.js'
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
@@ -39,7 +39,7 @@ const userInfo = new UserInfo({
 });
 
 //Работа с экземпляром класса Popup ошибки пользователя
-const popupError = new ErrorPopup('.error-popup');
+const popupError = new PopupWithError('.error-popup');
 
 
 //Работа с экземплярами Карточек (начальных) и их отрисовке на странице
@@ -57,12 +57,12 @@ function createCard(item, templateSelector) {
       handleCardLike: () => {
         api.likeCard(newCard)
           .then((res) => newCard.setCounterOfLikes(res.likes.length))
-          .catch((err) => popupError.openErrorPopup(err));
+          .catch((err) => popupError.openPopup(err));
       },
       handleCardDislike: () => {
         api.dislikeCard(newCard)
           .then((res) => newCard.setCounterOfLikes(res.likes.length))
-          .catch((err) => popupError.openErrorPopup(err));
+          .catch((err) => popupError.openPopup(err));
       }
     },
 
@@ -89,7 +89,7 @@ Promise.all([promiseGetUser, promiseGetCards])
   userInfo.setUserInfo(arrayOfObjectsUserAndCards[0]);
   cardsList.renderItems(arrayOfObjectsUserAndCards[1]);
 })
-.catch((err) => popupError.openErrorPopup(err));
+.catch((err) => popupError.openPopup(err));
 
 //Работа с экземплярами классов Popup редактирования профиля//
 //Popup заполнения карточки, Popup удаления карточки, Popup редактирования Аватара пользователя
@@ -112,7 +112,7 @@ function addCardApi(formValues) {
     cardsList.setItem(generatedCard);
     popupCard.closePopup();
   })
-  .catch((err) => popupError.openErrorPopup(err));
+  .catch((err) => popupError.openPopup(err));
 }
 
 const popupCard = new PopupWithForm({
@@ -124,7 +124,7 @@ const popupCard = new PopupWithForm({
       popupCard.changeStatusOfSubmitButton();
       addCardApi(formValues);
     })
-    .catch(() => popupError.openErrorPopup('Ошибка адреса'));
+    .catch(() => popupError.openPopup('Ошибка адреса'));
   },
 });
 
@@ -136,7 +136,7 @@ function changeAvatarApi(formValues) {
     userInfo.setUserInfo(UserInfoObject);
     popupAvatar.closePopup();
   })
-  .catch((err) => popupError.openErrorPopup(err));
+  .catch((err) => popupError.openPopup(err));
 }
 
 
@@ -149,7 +149,7 @@ const popupAvatar = new PopupWithForm({
       popupAvatar.changeStatusOfSubmitButton();
       changeAvatarApi(formValues);
     })
-    .catch(() => popupError.openErrorPopup('Ошибка адреса'));
+    .catch(() => popupError.openPopup('Ошибка адреса'));
   },
 
 })
@@ -165,7 +165,7 @@ const popupProfile = new PopupWithForm({
         userInfo.setUserInfo(updatedUser);
         popupProfile.closePopup();
       })
-      .catch((err) => popupError.openErrorPopup(err));
+      .catch((err) => popupError.openPopup(err));
   },
 });
 
@@ -179,7 +179,7 @@ const popupRemove = new PopupWithForm({
         cardToRemove.removeCard();
         popupRemove.closePopup();
       })
-      .catch((err) => popupError.openErrorPopup(err));
+      .catch((err) => popupError.openPopup(err));
   }
 });
 
