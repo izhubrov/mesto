@@ -40,6 +40,7 @@ const avatarEdit = profile.querySelector('.profile__avatar');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupCard = document.querySelector('.popup_type_card');
 const popupAvatar = document.querySelector('.popup_type_avatar');
+const popupError = document.querySelector('.error-popup');
 
 // // Переменные форм Popup
 const popupProfileForm = popupProfile.querySelector('.popup__form');
@@ -50,5 +51,5 @@ const popupAvatarForm = popupAvatar.querySelector('.popup__form');
 
 
 
-export {apiSettings, validationSettings, submitButtonsTexts, btnAdd, btnEdit, avatarEdit, popupProfileForm,
+export {apiSettings, validationSettings, submitButtonsTexts, btnAdd, btnEdit, avatarEdit, popupError, popupProfileForm,
   popupCardForm, popupAvatarForm, popupProfileInputName, popupProfileInputAbout}

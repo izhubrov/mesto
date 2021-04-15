@@ -1,0 +1,10 @@
+.error-popup__opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media screen and (max-width: 468px) {
+  .error-popup__opened {
+    width: calc(100% - 128px);
+  }
+}
