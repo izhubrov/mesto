@@ -16,18 +16,18 @@ ___
 ## Как использовать
 
 ### Для начала
-   * Установите [Node.js](https://nodejs.org/en/download/)
-   * Установите [Git Bash для Windows OS](https://gitforwindows.org/)
-   * Склонируйте проект https://github.com/izhubrov/mesto.git
+* Установите [Node.js](https://nodejs.org/en/download/)
+* Установите [Git Bash для Windows OS](https://gitforwindows.org/)
+* Склонируйте проект https://github.com/izhubrov/mesto.git
 
 ### Установка
-   * Установите необходимые зависимости из package.json
+* Установите необходимые зависимости из package.json
 
 ### Работа, запуск, деплой проекта
-   * Для локального запуска введите команду npm run dev
-   * Для сборки проекта введите команду npm run build
-   * Для работы с gh-pages установите пакет gh-pages следующей командой npm install gh-pages --save-dev
-   * Для деплоя проекта введите команду npm run deploy
+* Для локального запуска введите команду npm run dev
+* Для сборки проекта введите команду npm run build
+* Для работы с gh-pages установите пакет gh-pages следующей командой npm install gh-pages --save-dev
+* Для деплоя проекта введите команду npm run deploy
 
 ___
 ## Требования
